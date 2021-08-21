@@ -9,4 +9,4 @@ build_property.EnableSingleFileAnalyzer =
 build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = Juster.SpaceStation
-build_property.ProjectDir = F:\博客相关资料\blazor\Juster.SpaceStation\
+build_property.ProjectDir = F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\

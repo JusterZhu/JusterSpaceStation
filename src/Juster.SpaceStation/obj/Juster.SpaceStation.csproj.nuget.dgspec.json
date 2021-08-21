@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj": {}
+    "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj": {}
   },
   "projects": {
-    "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj": {
+    "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
+        "projectUniqueName": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
         "projectName": "Juster.SpaceStation",
-        "projectPath": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
+        "projectPath": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\obj\\",
+        "outputPath": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "e:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -47,6 +47,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "BootstrapBlazor": {
+              "target": "Package",
+              "version": "[5.7.1, )"
+            },
             "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
               "version": "[5.0.7, )"

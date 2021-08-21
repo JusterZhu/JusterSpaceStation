@@ -2,6 +2,28 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "BootstrapBlazor/5.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Authorization": "5.0.0",
+          "Microsoft.AspNetCore.Components.Web": "5.0.0",
+          "Microsoft.Extensions.Configuration.Json": "5.0.0",
+          "Microsoft.Extensions.Localization": "5.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/BootstrapBlazor.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/BootstrapBlazor.dll": {}
+        },
+        "build": {
+          "buildTransitive/BootstrapBlazor.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BootstrapBlazor.props": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/5.0.7": {
         "type": "package",
         "dependencies": {
@@ -33,6 +55,19 @@
         "type": "package",
         "build": {
           "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets": {}
+        }
+      },
+      "Microsoft.AspNetCore.Components.Authorization/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "5.0.0",
+          "Microsoft.AspNetCore.Components": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.dll": {}
         }
       },
       "Microsoft.AspNetCore.Components.Forms/5.0.7": {
@@ -221,6 +256,30 @@
           "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
         }
       },
+      "Microsoft.Extensions.Localization/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Localization.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.Extensions.Localization.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.Localization.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Localization.Abstractions/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Logging/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -256,6 +315,22 @@
         },
         "runtime": {
           "lib/net5.0/Microsoft.Extensions.Options.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Configuration.Binder": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0",
+          "Microsoft.Extensions.Primitives": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         }
       },
       "Microsoft.Extensions.Primitives/5.0.0": {
@@ -308,6 +383,28 @@
       }
     },
     "net5.0/browser-wasm": {
+      "BootstrapBlazor/5.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Authorization": "5.0.0",
+          "Microsoft.AspNetCore.Components.Web": "5.0.0",
+          "Microsoft.Extensions.Configuration.Json": "5.0.0",
+          "Microsoft.Extensions.Localization": "5.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/BootstrapBlazor.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/BootstrapBlazor.dll": {}
+        },
+        "build": {
+          "buildTransitive/BootstrapBlazor.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BootstrapBlazor.props": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/5.0.7": {
         "type": "package",
         "dependencies": {
@@ -339,6 +436,19 @@
         "type": "package",
         "build": {
           "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets": {}
+        }
+      },
+      "Microsoft.AspNetCore.Components.Authorization/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "5.0.0",
+          "Microsoft.AspNetCore.Components": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.dll": {}
         }
       },
       "Microsoft.AspNetCore.Components.Forms/5.0.7": {
@@ -527,6 +637,30 @@
           "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
         }
       },
+      "Microsoft.Extensions.Localization/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Localization.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.Extensions.Localization.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.Localization.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Localization.Abstractions/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Logging/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -562,6 +696,22 @@
         },
         "runtime": {
           "lib/net5.0/Microsoft.Extensions.Options.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Configuration.Binder": "5.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0",
+          "Microsoft.Extensions.Primitives": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         }
       },
       "Microsoft.Extensions.Primitives/5.0.0": {
@@ -615,6 +765,30 @@
     }
   },
   "libraries": {
+    "BootstrapBlazor/5.7.1": {
+      "sha512": "MuHjk07eYY2RSZEXl0R2pxe67tVzixLtf72H0BHQbReoNVlmsi30NrW3/0oDZuqhd/aXVc8qFP3CBL31DAGaaA==",
+      "type": "package",
+      "path": "bootstrapblazor/5.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bootstrapblazor.5.7.1.nupkg.sha512",
+        "bootstrapblazor.nuspec",
+        "build/BootstrapBlazor.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/BootstrapBlazor.props",
+        "buildTransitive/BootstrapBlazor.props",
+        "lib/net5.0/BootstrapBlazor.dll",
+        "lib/net5.0/BootstrapBlazor.xml",
+        "logo.png",
+        "staticwebassets/css/bootstrap.blazor.bundle.min.css",
+        "staticwebassets/js/bootstrap.blazor.bundle.min.js",
+        "staticwebassets/lib/summernote/font/summernote.eot",
+        "staticwebassets/lib/summernote/font/summernote.ttf",
+        "staticwebassets/lib/summernote/font/summernote.woff",
+        "staticwebassets/lib/summernote/font/summernote.woff2"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/5.0.7": {
       "sha512": "dLoLLlFkaj3+6oodVBBNjC9hjGMSzO9WT1syO54ZFACkPKddI1jEjvQ4aG4+NHIP0lp4e3zv3C5woWEZVpofKg==",
       "type": "package",
@@ -663,6 +837,21 @@
         "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets",
         "microsoft.aspnetcore.components.analyzers.5.0.7.nupkg.sha512",
         "microsoft.aspnetcore.components.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Components.Authorization/5.0.0": {
+      "sha512": "I++r4RdziNB9HeQbkHQvzg2N0rX4dSmA1105OnR5xMKZKL8E7TOKR+Mwf45uXgKvxYb08otPrZWTx1M5rmL/8g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.components.authorization/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.txt",
+        "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Components.Authorization.xml",
+        "microsoft.aspnetcore.components.authorization.5.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.components.authorization.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Components.Forms/5.0.7": {
@@ -972,6 +1161,44 @@
         "version.txt"
       ]
     },
+    "Microsoft.Extensions.Localization/5.0.0": {
+      "sha512": "PJ2TouziI0zcgiq2VapjNFkMsT05rZUfq0i6sY+59Ri6Mn9W7okJ1U5/CvetFDUAN0DHrXOTaaMSt5epUn6rQQ==",
+      "type": "package",
+      "path": "microsoft.extensions.localization/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Localization.dll",
+        "lib/net461/Microsoft.Extensions.Localization.xml",
+        "lib/net5.0/Microsoft.Extensions.Localization.dll",
+        "lib/net5.0/Microsoft.Extensions.Localization.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Localization.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Localization.xml",
+        "microsoft.extensions.localization.5.0.0.nupkg.sha512",
+        "microsoft.extensions.localization.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Localization.Abstractions/5.0.0": {
+      "sha512": "Uey8VI3FbPFLiLh+mnFN13DTbQASSuzV3ZeN9Oma2Y4YW7OBWjU9LAsvPISRBQHrwztXegSoCacFWqB9o992xQ==",
+      "type": "package",
+      "path": "microsoft.extensions.localization.abstractions/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Localization.Abstractions.dll",
+        "lib/net461/Microsoft.Extensions.Localization.Abstractions.xml",
+        "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.dll",
+        "lib/net5.0/Microsoft.Extensions.Localization.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.xml",
+        "microsoft.extensions.localization.abstractions.5.0.0.nupkg.sha512",
+        "microsoft.extensions.localization.abstractions.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Logging/5.0.0": {
       "sha512": "MgOwK6tPzB6YNH21wssJcw/2MKwee8b2gI7SllYfn6rvTpIrVvVS5HAjSU2vqSku1fwqRvWP0MdIi14qjd93Aw==",
       "type": "package",
@@ -1032,6 +1259,26 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "microsoft.extensions.options.5.0.0.nupkg.sha512",
         "microsoft.extensions.options.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "Microsoft.Extensions.Options.ConfigurationExtensions/5.0.0": {
+      "sha512": "280RxNJqOeQqq47aJLy5D9LN61CAWeuRA83gPToQ8B9jl9SNdQ5EXjlfvF66zQI5AXMl+C/3hGnbtIEN+X3mqA==",
+      "type": "package",
+      "path": "microsoft.extensions.options.configurationextensions/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Options.ConfigurationExtensions.dll",
+        "lib/net461/Microsoft.Extensions.Options.ConfigurationExtensions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.xml",
+        "microsoft.extensions.options.configurationextensions.5.0.0.nupkg.sha512",
+        "microsoft.extensions.options.configurationextensions.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -1139,6 +1386,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "BootstrapBlazor >= 5.7.1",
       "Microsoft.AspNetCore.Components.WebAssembly >= 5.0.7",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 5.0.7",
       "System.Net.Http.Json >= 5.0.0"
@@ -1152,11 +1400,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
+      "projectUniqueName": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
       "projectName": "Juster.SpaceStation",
-      "projectPath": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
+      "projectPath": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "F:\\博客相关资料\\blazor\\Juster.SpaceStation\\obj\\",
+      "outputPath": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "e:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -1192,6 +1440,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "BootstrapBlazor": {
+            "target": "Package",
+            "version": "[5.7.1, )"
+          },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",
             "version": "[5.0.7, )"
