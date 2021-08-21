@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="F:\博客相关资料\blazor\Juster.SpaceStation\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="F:\博客相关资料\blazor\Juster.SpaceStation\obj\Debug\net5.0\scopedcss\bundle\" />
+</StaticWebAssets>
