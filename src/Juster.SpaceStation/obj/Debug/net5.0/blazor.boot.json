@@ -8,6 +8,7 @@
   "resources": {
     "assembly": {
       "BootstrapBlazor.dll": "sha256-NnBkHvkCNhIEyKIYatpPn6XlpsBRfYR6JYdUtnRItRE=",
+      "BootstrapBlazor.Chart.dll": "sha256-VAmi+7G5D12DMcEX+9vmuRYHSCpvS2yzqme7GTd8LMY=",
       "Microsoft.AspNetCore.Authorization.dll": "sha256-kc2VPvpVo2nTNaP8zwT2XM7j0zgRIkQytHYxFzW2XAE=",
       "Microsoft.AspNetCore.Components.dll": "sha256-NPVu9TiPMad4eIdUMD4DshGwyPEoy2VgddHYPYzK2AI=",
       "Microsoft.AspNetCore.Components.Authorization.dll": "sha256-RETzcaqJB7uXmSqtgbNeKNNc5YC\/Ux+Ud\/XI\/\/VCR38=",
@@ -200,11 +201,11 @@
       "mscorlib.dll": "sha256-aRw41w\/QxOqc3NzhbK7UKf1zT6z\/oHtp9BlXl4JWwjM=",
       "netstandard.dll": "sha256-stWPH7tpmfc4JFroiKGKWcPfLQ+ALD6yQUXA9NiV0fQ=",
       "System.Private.CoreLib.dll": "sha256-PbMTdb+kswRpFmuD8S4hY70nkZ9LeYJg7y3wm7hj0CQ=",
-      "Juster.SpaceStation.dll": "sha256-aENma27HguZ3smee\/aap\/L\/+9GKs3SRKJLlWujqFldU="
+      "Juster.SpaceStation.dll": "sha256-CMK64HnCjo44jw8gixTW0m\/sGOYPZ3rA9TgZviNHK4g="
     },
     "lazyAssembly": null,
     "pdb": {
-      "Juster.SpaceStation.pdb": "sha256-YMUBQd2Iwc5OHxHWjKUhGy56P8iiS9Xc9nvgxcnA6es="
+      "Juster.SpaceStation.pdb": "sha256-Vn8VpFfJA2hVDEylAKFTzI7ZFSd4gUJNDXJ+jh6I4N4="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-SQvzbzBfueaAxSKIKE1khBH02NH2MJJaWDBav\/S5MSs=",

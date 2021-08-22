@@ -104,6 +104,19 @@ using BootstrapBlazor.Localization;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 17 "F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\Pages\Index.razor"
+ 
+    private string content = 
+              @"GeneralUpdate是基于.net standard开发的一款（c/s应用）自动升级程序。该组件将更新的核心部分抽离出来方便应用于多种项目当中目前适用于wpf，控制台应用，winfrom。" + "\r\n" +
+              "（1）本组件（除Single组件仅支持Framework以外）均支持框架版本 .NET Framework 4.6.1 | .NET Core 2.0 | .NET 5" + "\r\n" +
+              "（2）如果有任何使用问题可以在Github的issues上进行提问，每周会解决并解答bug或者问题。"  + "\r\n" +
+              "（3）每次迭代新版本doc文件夹中的帮助文档也会随之更新，各位开发者请多关注。"   + "\r\n" +
+              "（4）如果该组件能够帮助到您，希望可以点个Strat和关注一下文档末尾的联系方式。您的支持是对开源作者的动力。";
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

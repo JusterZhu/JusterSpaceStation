@@ -1286,3 +1286,7 @@ F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debu
 F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\build-gz\FurVvfC9.gz
 F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\build-gz\D+zik31+.gz
 F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\build-gz\rpasHoW+.gz
+F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\bin\Debug\net5.0\wwwroot\_framework\BootstrapBlazor.Chart.dll.gz
+F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\bin\Debug\net5.0\wwwroot\_framework\BootstrapBlazor.Chart.dll
+F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\Juster.SpaceStation.csproj.AssemblyReference.cache
+F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\build-gz\dv3EnJvw.gz

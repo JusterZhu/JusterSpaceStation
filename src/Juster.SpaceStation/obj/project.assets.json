@@ -24,6 +24,24 @@
           "buildMultiTargeting/BootstrapBlazor.props": {}
         }
       },
+      "BootstrapBlazor.Chart/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "BootstrapBlazor": "5.4.6"
+        },
+        "compile": {
+          "lib/net5.0/BootstrapBlazor.Chart.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/BootstrapBlazor.Chart.dll": {}
+        },
+        "build": {
+          "buildTransitive/BootstrapBlazor.Chart.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BootstrapBlazor.Chart.props": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/5.0.7": {
         "type": "package",
         "dependencies": {
@@ -403,6 +421,24 @@
         },
         "buildMultiTargeting": {
           "buildMultiTargeting/BootstrapBlazor.props": {}
+        }
+      },
+      "BootstrapBlazor.Chart/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "BootstrapBlazor": "5.4.6"
+        },
+        "compile": {
+          "lib/net5.0/BootstrapBlazor.Chart.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/BootstrapBlazor.Chart.dll": {}
+        },
+        "build": {
+          "buildTransitive/BootstrapBlazor.Chart.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/BootstrapBlazor.Chart.props": {}
         }
       },
       "Microsoft.AspNetCore.Authorization/5.0.7": {
@@ -787,6 +823,26 @@
         "staticwebassets/lib/summernote/font/summernote.ttf",
         "staticwebassets/lib/summernote/font/summernote.woff",
         "staticwebassets/lib/summernote/font/summernote.woff2"
+      ]
+    },
+    "BootstrapBlazor.Chart/5.1.1": {
+      "sha512": "GKam1zPUmzvpZbFfxdXs597UmvOsa8y1axcOm2O9JP8jsnGo7GDUU6E5Ta6RFz/hg1TpM1AwyUB89PY0dTiZ7A==",
+      "type": "package",
+      "path": "bootstrapblazor.chart/5.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bootstrapblazor.chart.5.1.1.nupkg.sha512",
+        "bootstrapblazor.chart.nuspec",
+        "build/BootstrapBlazor.Chart.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/BootstrapBlazor.Chart.props",
+        "buildTransitive/BootstrapBlazor.Chart.props",
+        "lib/net5.0/BootstrapBlazor.Chart.dll",
+        "lib/net5.0/BootstrapBlazor.Chart.xml",
+        "logo.png",
+        "staticwebassets/css/bootstrap.blazor.chart.bundle.min.css",
+        "staticwebassets/js/bootstrap.blazor.chart.bundle.min.js"
       ]
     },
     "Microsoft.AspNetCore.Authorization/5.0.7": {
@@ -1387,6 +1443,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "BootstrapBlazor >= 5.7.1",
+      "BootstrapBlazor.Chart >= 5.1.1",
       "Microsoft.AspNetCore.Components.WebAssembly >= 5.0.7",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 5.0.7",
       "System.Net.Http.Json >= 5.0.0"
@@ -1443,6 +1500,10 @@
           "BootstrapBlazor": {
             "target": "Package",
             "version": "[5.7.1, )"
+          },
+          "BootstrapBlazor.Chart": {
+            "target": "Package",
+            "version": "[5.1.1, )"
           },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",

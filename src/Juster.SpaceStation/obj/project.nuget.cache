@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BShE8lLdSV+alrhbGdU/8RZSX9EzOmUzmMwOswVZ3QVZFFYbrZxHErp6h8VQ/Qi19mD/4boFHNx/C1v9Jg1YfA==",
+  "dgSpecHash": "HmbPhf66r/o6xDj2hYW06zKRh91uAc7QGbxegV9Qpvh4UxbSULrvk4o0JWTu2zPwyTLW4Knmk6CVmt3hpvj6mg==",
   "success": true,
   "projectFilePath": "F:\\博客相关资料\\blazor\\JusterSpaceStation\\src\\Juster.SpaceStation\\Juster.SpaceStation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\bootstrapblazor\\5.7.1\\bootstrapblazor.5.7.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\bootstrapblazor.chart\\5.1.1\\bootstrapblazor.chart.5.1.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.7\\microsoft.aspnetcore.authorization.5.0.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.7\\microsoft.aspnetcore.components.5.0.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\5.0.7\\microsoft.aspnetcore.components.analyzers.5.0.7.nupkg.sha512",

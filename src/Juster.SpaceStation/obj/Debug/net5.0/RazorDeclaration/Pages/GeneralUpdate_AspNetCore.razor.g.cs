@@ -104,6 +104,31 @@ using BootstrapBlazor.Localization;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 26 "F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\Pages\GeneralUpdate_AspNetCore.razor"
+       
+    private string use_string = 
+        @"static void Main(string[] args)
+        {
+            var resultBase64 = args[0];
+            var bootstrap = new GeneralUpdateBootstrap();
+            bootstrap.Exception += OnException;
+            bootstrap.MutiDownloadError += OnMutiDownloadError;
+            bootstrap.MutiDownloadCompleted += OnMutiDownloadCompleted;
+            bootstrap.MutiDownloadStatistics += OnMutiDownloadStatistics;
+            bootstrap.MutiDownloadProgressChanged += OnMutiDownloadProgressChanged;
+            bootstrap.MutiAllDownloadCompleted += OnMutiAllDownloadCompleted;
+            bootstrap.Strategy<DefaultStrategy>().
+                //下载超时时间（单位：秒）,如果不指定则默认超时时间为30秒。
+                Option(UpdateOption.DownloadTimeOut, 60).
+                RemoteAddressBase64(resultBase64).
+                LaunchAsync();
+            Console.Read();
+        }";
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

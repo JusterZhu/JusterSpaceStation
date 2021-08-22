@@ -2,4 +2,5 @@
   <ContentRoot BasePath="/" Path="F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\bin\Debug\net5.0\wwwroot\" />
   <ContentRoot BasePath="/" Path="F:\博客相关资料\blazor\JusterSpaceStation\src\Juster.SpaceStation\obj\Debug\net5.0\scopedcss\bundle\" />
   <ContentRoot BasePath="_content/BootstrapBlazor" Path="C:\Users\Administrator\.nuget\packages\bootstrapblazor\5.7.1\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/BootstrapBlazor.Chart" Path="C:\Users\Administrator\.nuget\packages\bootstrapblazor.chart\5.1.1\build\..\staticwebassets\" />
 </StaticWebAssets>
