@@ -7,35 +7,29 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            ////创建树
-            //var tree = new BinaryTree();
+            ThreadedBinaryNode root = new ThreadedBinaryNode(1,"tom");
+            ThreadedBinaryNode node2 = new ThreadedBinaryNode(3,"jack");
+            ThreadedBinaryNode node3 = new ThreadedBinaryNode(6,"simth");
+            ThreadedBinaryNode node4 = new ThreadedBinaryNode(8,"mary");
+            ThreadedBinaryNode node5 = new ThreadedBinaryNode(10,"king");
+            ThreadedBinaryNode node6 = new ThreadedBinaryNode(14,"dim");
+            root.Left = node2;
+            root.Right = node3;
+            node2.Left = node4; 
+            node2.Right = node5;
+            node3.Left = node6;
+            ThreadedBinaryTree threadedBinaryTree = new ThreadedBinaryTree();
+            threadedBinaryTree.SetRoot(root);
+            threadedBinaryTree.SetThreadedBinaryNode();
+            ThreadedBinaryNode leftNode = node5.Left;
+            Console.WriteLine("10号节点的前驱节点是：" + leftNode);
 
-            ////创建需要的节点
-            //TreeNode root = new TreeNode(1,"名册");
-            //TreeNode node2 = new TreeNode(2, "张三");
-            //TreeNode node3 = new TreeNode(3,"李四");
-            //TreeNode node4 = new TreeNode(4,"王五");
-            //TreeNode node5 = new TreeNode(5, "赵六");
+            ThreadedBinaryNode rightNode = node5.Right;
+            Console.WriteLine("10号节点的后继节点是：" + rightNode);
 
-
-            ////手动创建二叉树
-            //root.Left = node2;
-            //root.Right = node3;
-            //node3.Left = node5;
-            //node3.Right = node4;
-            //tree.SetRoot(root);
-
-            //Console.WriteLine("删除前，前序遍历");
-            //tree.PreOrder();
-            //tree.DeleteNode(5);
-            //Console.WriteLine("删除后，前序遍历");
-            //tree.PreOrder();
-            //tree.DeleteNode(3);
-            //Console.WriteLine("删除后，前序遍历");
-            //tree.PreOrder();
-            int[] array = { 1, 2, 3, 4, 5, 6, 7 };
-            ArrayBinaryTree arrayBinaryTree = new ArrayBinaryTree(array);
-            arrayBinaryTree.PreOrder();
+            Console.WriteLine("线索化的方式遍历线索化二叉树");
+            threadedBinaryTree.ThreadedList();// 8,3,10,1,14,6
+            //当线索化二叉树后，能在
             Console.Read();
         }
     }
