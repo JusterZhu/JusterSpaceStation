@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Tree
 {
+    /// <summary>
+    /// 线索化二叉树
+    /// </summary>
     public class ThreadedBinaryNode 
     {
         public int Id { get; set; }
