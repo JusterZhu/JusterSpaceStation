@@ -24,6 +24,11 @@ namespace MyAlgorithm.Graph
         private int NumOfEdges { get; set; }
 
         /// <summary>
+        /// 记录某个节点是否被访问
+        /// </summary>
+        private bool[] IsVisited;
+
+        /// <summary>
         /// 构造器
         /// </summary>
         /// <param name="n"></param>
@@ -33,6 +38,124 @@ namespace MyAlgorithm.Graph
             Edges = new int[n,n];
             Vertexs = new List<string>(n);
             NumOfEdges = 0;
+            IsVisited = new bool[n];
+        }
+
+        /// <summary>
+        /// 得到第一个邻接节点下标w
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>如果存在就返回对应的下标，否则返回-1</returns>
+        public int GetFirstNeighbor(int index) 
+        {
+            for (int i = 0; i < Vertexs.Count; i++)
+            {
+                if (Edges[index,i] > 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        //根据前一个邻接节点的下标来获取下一个邻接节点
+        public int GetNextNeighbor(int v1, int v2) 
+        {
+            for (int i = v2 + 1; i < Vertexs.Count; i++)
+            {
+                if (Edges[v1,i] > 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        //深度优先遍历算法
+        public void DFS(bool[] isVisited,int i) 
+        {
+            //首先我们访问该节点
+            Console.Write(GetValueByIndex(i) + "->");
+            //将节点设置为已访问
+            IsVisited[i] = true;
+            //查找节点i的第一个邻接节点
+            int w = GetFirstNeighbor(i);
+            //说明有
+            while (w != -1)
+            {
+                //那么就判断是否被访问过
+                if (!isVisited[w])
+                {
+                    DFS(isVisited,w);
+                }
+                //如果已经被访问过
+                w = GetNextNeighbor(i,w);
+            }
+        }
+
+        /// <summary>
+        /// 对DFS进行一个重载，遍历我们所有的节点，并进行DFS
+        /// </summary>
+        public void DFS()
+        {
+            IsVisited = new bool[Vertexs.Count];
+            //遍历所有的节点，进行DFS回溯
+            for (int i = 0; i < GetNumIfVertex(); i++)
+            {
+                if (!IsVisited[i])
+                {
+                    DFS(IsVisited,i);
+                }
+            }
+        }
+
+        //对一个节点进行广度优先遍历的方法
+        private void BFS(bool[] isVisited ,int i) 
+        {
+            int u;//表示队列的头节点对应下标
+            int w;//邻接节点
+            //队列，记录节点访问顺序
+            LinkedList<int> queue = new LinkedList<int>();
+            Console.Write(GetValueByIndex(i) + "->");
+            //标记为已访问
+            IsVisited[i] = true;
+            //将节点加入队列
+            queue.AddLast(i);
+            while (queue.Count != 0)
+            {
+                //取出队列的头节点下标
+                u = queue.First(); 
+                queue.RemoveFirst();
+                //得到第一个邻节点下标
+                w = GetFirstNeighbor(u);
+                while (w != -1)
+                {
+                    //是否访问过
+                    if (!isVisited[w])
+                    {
+                        Console.Write(GetValueByIndex(w) + "->");
+                        //标记已访问
+                        isVisited[w] = true;
+                        //入队
+                        queue.AddLast(w);
+                    }
+                    //以u为前驱节点，找w后面的下一个邻接点
+                    w = GetNextNeighbor(u,w);//体现出广度优先
+                }
+            }
+        }
+
+        //遍历所有的节点，都进行广度优先搜索
+        public void BFS() 
+        {
+            IsVisited = new bool[Vertexs.Count];
+            for (int i = 0; i < GetNumIfVertex(); i++)
+            {
+                if (!IsVisited[i])
+                {
+                    BFS(IsVisited, i);
+                }
+            }
         }
 
         /// <summary>
