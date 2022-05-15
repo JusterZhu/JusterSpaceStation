@@ -1,4 +1,5 @@
 ﻿using MyAlgorithm.Graph;
+using MyAlgorithm.Search;
 using MyAlgorithm.Tree;
 using System;
 
@@ -8,9 +9,18 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            //数组进行升序排序
-            int[] arr = { 4, 6, 8, 5, 9,-1,90,89,56,-999 };
-            HeapSort.HeapSort0(arr);
+            //初始化一个有序的100长度的数组
+            int[] arr = new int[100];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = i + 1;
+            }
+            //使用二分查找，并在方法内部加一个打印，输出几次代表执行了几次
+            var result = BinarySearch.Search(arr,0,arr.Length,99);
+            Console.WriteLine(result);
+            //使用插值查找，并在方法内部加一个打印，输出几次代表执行了几次
+            var result0 = InsertValueSearch.Search(arr, 0,arr.Length -1 , 99);
+            Console.WriteLine(result0);
             Console.Read();
         }
     }

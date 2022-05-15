@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Stack
 {
+    /// <summary>
+    /// 逆波兰表达式
+    /// </summary>
     internal class MyPolandNotaion
     {
         //先定义一个逆波兰表达式

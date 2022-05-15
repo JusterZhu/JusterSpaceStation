@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Stack
 {
+    /// <summary>
+    /// 队列
+    /// </summary>
     public class MyQueue1
     {
         //队列最大值

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Recursion
 {
+    /// <summary>
+    /// 递归
+    /// </summary>
     internal class MyRecursion
     {
         public void Print(int n) 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Stack
 {
+    /// <summary>
+    /// 环形队列
+    /// </summary>
     public class CircleArrayQueue
     {
         //队列最大值

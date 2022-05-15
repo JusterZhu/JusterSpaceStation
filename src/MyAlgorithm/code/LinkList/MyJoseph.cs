@@ -12,6 +12,9 @@ namespace MyAlgorithm.LinkList
 //myJoseph.Kill(1,2,5);
 //myJoseph.Print();
 
+    /// <summary>
+    /// 约瑟夫环
+    /// </summary>
     public class PersonNode
     {
         public int Id { get; set; }

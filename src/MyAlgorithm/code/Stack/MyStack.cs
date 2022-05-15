@@ -17,6 +17,9 @@ namespace MyAlgorithm.Stack
     //myStack.Pop();
     //myStack.Print();
 
+    /// <summary>
+    /// 栈
+    /// </summary>
     internal class MyStack
     {
         private int maxSize;//栈的大小

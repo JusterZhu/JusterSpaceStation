@@ -59,6 +59,9 @@ namespace MyAlgorithm.LinkList
         }
     }
 
+    /// <summary>
+    /// 单链表
+    /// </summary>
     public class SingleLinkedList
     {
         /*

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.SparseArray
 {
+    /// <summary>
+    /// 稀疏数组
+    /// </summary>
     public class MySparseArray
     {
         private int[,] SparseArray = new int[12, 12];

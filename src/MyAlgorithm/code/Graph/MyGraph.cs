@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAlgorithm.Graph
 {
+    /// <summary>
+    /// 图
+    /// </summary>
     internal class MyGraph
     {
         /// <summary>
