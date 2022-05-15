@@ -10,17 +10,8 @@ namespace MyAlgorithm
         static void Main(string[] args)
         {
             //初始化一个有序的100长度的数组
-            int[] arr = new int[100];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = i + 1;
-            }
-            //使用二分查找，并在方法内部加一个打印，输出几次代表执行了几次
-            var result = BinarySearch.Search(arr,0,arr.Length,99);
-            Console.WriteLine(result);
-            //使用插值查找，并在方法内部加一个打印，输出几次代表执行了几次
-            var result0 = InsertValueSearch.Search(arr, 0,arr.Length -1 , 99);
-            Console.WriteLine(result0);
+            int[] arr = { 1,8,10,89,1000,1234 };
+            Console.WriteLine(FibonacciSearch.Search(arr,89));
             Console.Read();
         }
     }
