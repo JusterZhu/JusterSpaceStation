@@ -10,31 +10,9 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            //地图
-            int[,] map = new int[8, 7];
-
-            //初始化墙壁
-            //上下全部为1，不可走
-            for (int i = 0; i < 7; i++)
-            {
-                map[0, i] = 1;
-                map[7, i] = 1;
-            }
-            //左右两个边为1，不可走
-            for (int i = 0; i < 8; i++)
-            {
-                map[i, 0] = 1;
-                map[i, 6] = 1;
-            }
-
-            //设置挡板
-            map[3, 1] = 1;
-            map[3, 2] = 1;
-
-            Maze maze = new Maze();
-            maze.Print(map);
-            maze.SetWay(map,1,1);
-            maze.Print(map);
+            Queen8 queen8 = new Queen8();
+            queen8.Check(0);
+            Console.WriteLine("一共有" + Queen8.count + "解法！！");
             Console.Read();
         }
     }
