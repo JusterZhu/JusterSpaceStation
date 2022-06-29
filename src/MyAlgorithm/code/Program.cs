@@ -11,8 +11,8 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            int[] array = { 3,9,-1,10,20 };
-            BubbleSort.Sort(array);
+            int[] array = { 101,34,119,1 };
+            SelectSort.Sort(array);
             Console.Read();
         }
     }
