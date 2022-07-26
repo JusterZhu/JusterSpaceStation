@@ -1,0 +1,15 @@
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\bin\Debug\net6.0\MyAlgorithm.exe
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\bin\Debug\net6.0\MyAlgorithm.deps.json
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\bin\Debug\net6.0\MyAlgorithm.runtimeconfig.json
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\bin\Debug\net6.0\MyAlgorithm.dll
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\bin\Debug\net6.0\MyAlgorithm.pdb
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.csproj.AssemblyReference.cache
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.GeneratedMSBuildEditorConfig.editorconfig
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.AssemblyInfoInputs.cache
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.AssemblyInfo.cs
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.csproj.CoreCompileInputs.cache
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.dll
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\refint\MyAlgorithm.dll
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.pdb
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\MyAlgorithm.genruntimeconfig.cache
+D:\git_community\JusterSpaceStation\src\MyAlgorithm\code\obj\Debug\net6.0\ref\MyAlgorithm.dll

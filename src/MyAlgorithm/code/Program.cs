@@ -11,8 +11,8 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            int[] array = { 8,9,1,7,2,3,5,4,6,0};
-            ShellSort.Sort(array);
+            int[] array = { -9,78,0,23,-567,70,-1,900,4561 };
+            QuickSort.Sort(array,0,array.Length - 1);
             Console.Read();
         }
     }
