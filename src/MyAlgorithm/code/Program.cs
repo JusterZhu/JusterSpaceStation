@@ -11,8 +11,11 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            int[] array = { -9,78,0,23,-567,70,-1,900,4561 };
-            QuickSort.Sort(array,0,array.Length - 1);
+            int[] array = { 8,4,5,7,1,3,6,2 };
+            //归并排序需要一个额外的空间
+            int[] temp =new int[array.Length];
+            MergeSort.Sort(array,0,array.Length - 1, temp);
+            Console.WriteLine(string.Join(' ', array));
             Console.Read();
         }
     }
