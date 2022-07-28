@@ -4,6 +4,7 @@ using MyAlgorithm.Search;
 using MyAlgorithm.Sort;
 using MyAlgorithm.Tree;
 using System;
+using System.Diagnostics;
 
 namespace MyAlgorithm
 {
@@ -11,11 +12,18 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            int[] array = { 8,4,5,7,1,3,6,2 };
-            //归并排序需要一个额外的空间
-            int[] temp =new int[array.Length];
-            MergeSort.Sort(array,0,array.Length - 1, temp);
-            Console.WriteLine(string.Join(' ', array));
+            //int[] array = { 53, 3, 542, 748, 14, 214 };
+            Random random = new Random();
+            int[] array = new int[8000000];
+            for (int i = 0; i < array.Length; i++) 
+            { 
+                array[i] = random.Next(0, array.Length);
+            }
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Restart();
+            RedixSort.Sort(array);
+            stopwatch.Stop();
+            Console.WriteLine("耗时" + stopwatch.ElapsedMilliseconds + "毫秒");
             Console.Read();
         }
     }
