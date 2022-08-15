@@ -1,4 +1,5 @@
 ﻿using MyAlgorithm.Graph;
+using MyAlgorithm.LinkList;
 using MyAlgorithm.Recursion;
 using MyAlgorithm.Search;
 using MyAlgorithm.Sort;
@@ -12,18 +13,13 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            //int[] array = { 53, 3, 542, 748, 14, 214 };
-            Random random = new Random();
-            int[] array = new int[8000000];
-            for (int i = 0; i < array.Length; i++) 
-            { 
-                array[i] = random.Next(0, array.Length);
-            }
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            stopwatch.Restart();
-            RedixSort.Sort(array);
-            stopwatch.Stop();
-            Console.WriteLine("耗时" + stopwatch.ElapsedMilliseconds + "毫秒");
+            HashTable hashTable = new HashTable(7);
+            hashTable.Add(new Emp(2345, "emp" + 678, 15));
+            hashTable.Add(new Emp(1, "emp" + 678, 15));
+            hashTable.Add(new Emp(2, "emp" + 678, 15));
+            hashTable.Add(new Emp(123, "emp" + 678, 15));
+            hashTable.Print();
+            hashTable.FindEmpById(8);
             Console.Read();
         }
     }
