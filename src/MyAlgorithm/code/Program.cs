@@ -13,13 +13,9 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            HashTable hashTable = new HashTable(7);
-            hashTable.Add(new Emp(2345, "emp" + 678, 15));
-            hashTable.Add(new Emp(1, "emp" + 678, 15));
-            hashTable.Add(new Emp(2, "emp" + 678, 15));
-            hashTable.Add(new Emp(123, "emp" + 678, 15));
-            hashTable.Print();
-            hashTable.FindEmpById(8);
+            int[] array = new int[] { 13,7,8,3,29,6,1 };
+            HuffmanNode root =   HuffmanTree.Create(array);
+            HuffmanTree.PreOrder(root);
             Console.Read();
         }
     }
