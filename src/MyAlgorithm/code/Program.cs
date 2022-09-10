@@ -1,4 +1,5 @@
-﻿using MyAlgorithm.Graph;
+﻿using MyAlgorithm.DAC;
+using MyAlgorithm.Graph;
 using MyAlgorithm.LinkList;
 using MyAlgorithm.Recursion;
 using MyAlgorithm.Search;
@@ -13,9 +14,7 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            int[] array = new int[] { 13,7,8,3,29,6,1 };
-            HuffmanNode root =   HuffmanTree.Create(array);
-            HuffmanTree.PreOrder(root);
+            Hanoitower.Move(5,'A', 'B', 'C');
             Console.Read();
         }
     }
