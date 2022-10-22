@@ -1,5 +1,6 @@
 ﻿using MyAlgorithm.DAC;
 using MyAlgorithm.Graph;
+using MyAlgorithm.KMP;
 using MyAlgorithm.LinkList;
 using MyAlgorithm.Recursion;
 using MyAlgorithm.Search;
@@ -7,6 +8,7 @@ using MyAlgorithm.Sort;
 using MyAlgorithm.Tree;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MyAlgorithm
 {
@@ -14,7 +16,10 @@ namespace MyAlgorithm
     {
         static void Main(string[] args)
         {
-            Hanoitower.Move(5,'A', 'B', 'C');
+            string str1 = "BBD ABCDAB ABCDABCDABDE";
+            string str2 = "ABCDABD";
+            int[] nextArray = KMPAlgorithm.KMPNext(str2);
+            Console.WriteLine("NEXT=" + string.Join(' ',nextArray));
             Console.Read();
         }
     }
