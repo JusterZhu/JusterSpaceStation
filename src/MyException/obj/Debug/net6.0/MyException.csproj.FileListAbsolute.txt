@@ -1,0 +1,15 @@
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\bin\Debug\net6.0\MyException.exe
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\bin\Debug\net6.0\MyException.deps.json
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\bin\Debug\net6.0\MyException.runtimeconfig.json
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\bin\Debug\net6.0\MyException.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\bin\Debug\net6.0\MyException.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.csproj.AssemblyReference.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.GeneratedMSBuildEditorConfig.editorconfig
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.AssemblyInfoInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.AssemblyInfo.cs
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.csproj.CoreCompileInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\refint\MyException.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\MyException.genruntimeconfig.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyException\obj\Debug\net6.0\ref\MyException.dll
