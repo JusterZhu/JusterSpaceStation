@@ -1,0 +1,15 @@
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\bin\Debug\net6.0\MyConditional.exe
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\bin\Debug\net6.0\MyConditional.deps.json
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\bin\Debug\net6.0\MyConditional.runtimeconfig.json
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\bin\Debug\net6.0\MyConditional.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\bin\Debug\net6.0\MyConditional.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.csproj.AssemblyReference.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.GeneratedMSBuildEditorConfig.editorconfig
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.AssemblyInfoInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.AssemblyInfo.cs
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.csproj.CoreCompileInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\refint\MyConditional.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\MyConditional.genruntimeconfig.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyConditional\obj\Debug\net6.0\ref\MyConditional.dll
