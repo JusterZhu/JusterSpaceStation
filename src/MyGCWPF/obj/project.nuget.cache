@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "minVzILlVXvegJp0I3Z+aYHiicDj11Fs4tkEGlCdXTnGB1viEAlDJYEaYG3LnS7cDELyTy7nCWlP2lmcQNpWVw==",
+  "success": true,
+  "projectFilePath": "F:\\git_project\\JusterSpaceStation\\JusterSpaceStation\\src\\MyGCWPF\\MyGCWPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zhuzh\\.nuget\\packages\\communitytoolkit.mvvm\\8.0.0\\communitytoolkit.mvvm.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

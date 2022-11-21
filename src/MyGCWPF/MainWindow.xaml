@@ -1,0 +1,26 @@
+﻿<Window xmlns:Controls="clr-namespace:MyGCWPF.Controls"  x:Class="MyGCWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyGCWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding ClearCommand}" Width="100" Content="Clear"/>
+            <Button  Width="100" Content="Clear2" Click="Button_Click"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding MyImages}" Grid.Row="1" x:Name="LstBox">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Controls:MiniImage Width="266" Height="400" Source="{Binding Path=MyPath}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
