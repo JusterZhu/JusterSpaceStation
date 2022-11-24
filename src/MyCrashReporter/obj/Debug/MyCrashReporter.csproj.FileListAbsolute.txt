@@ -1,0 +1,13 @@
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\MyCrashReporter.exe.config
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\MyCrashReporter.exe
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\MyCrashReporter.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\CrashReporter.NET.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\CrashReporter.NET.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\CrashReporter.NET.xml
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\bin\Debug\CrashReporter.NET.dll.config
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.csproj.AssemblyReference.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.csproj.SuggestedBindingRedirects.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.csproj.CoreCompileInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.csproj.CopyComplete
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.exe
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyCrashReporter\obj\Debug\MyCrashReporter.pdb
