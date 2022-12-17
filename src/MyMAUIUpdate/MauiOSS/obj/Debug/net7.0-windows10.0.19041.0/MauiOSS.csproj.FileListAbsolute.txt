@@ -1,0 +1,12 @@
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\bin\Debug\net7.0-windows10.0.19041.0\MauiOSS.deps.json
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\bin\Debug\net7.0-windows10.0.19041.0\MauiOSS.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\bin\Debug\net7.0-windows10.0.19041.0\MauiOSS.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.csproj.AssemblyReference.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.GeneratedMSBuildEditorConfig.editorconfig
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.AssemblyInfoInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.AssemblyInfo.cs
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.csproj.CoreCompileInputs.cache
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\refint\MauiOSS.dll
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\MauiOSS.pdb
+F:\git_project\JusterSpaceStation\JusterSpaceStation\src\MyMAUIUpdate\MauiOSS\obj\Debug\net7.0-windows10.0.19041.0\ref\MauiOSS.dll
