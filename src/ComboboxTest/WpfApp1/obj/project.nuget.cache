@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "NggGjTGoOCeUjlHzrJ/UJVl0+hanV8DAXZjfFhg+cViyMIT7tmScuSDvU/J2VpG79utl1KbEF8jjzDgY19G0MA==",
+  "success": true,
+  "projectFilePath": "F:\\git_project\\JusterSpaceStation\\JusterSpaceStation\\src\\ComboboxTest\\WpfApp1\\WpfApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zhuzh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\zhuzh\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\zhuzh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\zhuzh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.12\\microsoft.netcore.app.host.win-x64.6.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

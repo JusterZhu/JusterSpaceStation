@@ -1,0 +1,87 @@
+﻿using Android.Content;
+using Android.OS;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MauiApp1.Services
+{
+    public class UpdateService : IUpdateService
+    {
+        readonly HttpClient _client;
+
+        public UpdateService()
+        {
+            _client = new HttpClient();
+        }
+
+        public async Task<Dictionary<string, string>> CheckUpdatesAsync(string url)
+        {
+            var result = new Dictionary<string, string>();
+            // 获取当前版本号
+            var currentVersion = VersionTracking.CurrentVersion;
+
+            var latestVersion = await _client.GetStringAsync(url);
+
+            result.Add("CurrentVersion", currentVersion);
+            result.Add("LatestVersion", latestVersion);
+
+            return result;
+        }
+
+        public void InstallNewVersion()
+        {
+            var file = $"{FileSystem.AppDataDirectory}/{"com.masa.mauidemo.apk"}";
+
+            var apkFile = new Java.IO.File(file);
+
+            var intent = new Intent(Intent.ActionView);
+            // 判断Android版本
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
+            {
+                //给临时读取权限
+                intent.SetFlags(ActivityFlags.GrantReadUriPermission);
+                var uri = FileProvider.GetUriForFile(Android.App.Application.Context, "com.masa.mauidemo.fileprovider", apkFile);
+                // 设置显式 MIME 数据类型
+                intent.SetDataAndType(uri, "application/vnd.android.package-archive");
+            }
+            else
+            {
+                intent.SetDataAndType(Android.Net.Uri.FromFile(new Java.IO.File(file)), "application/vnd.android.package-archive");
+            }
+            //指定以新任务的方式启动Activity
+            intent.AddFlags(ActivityFlags.NewTask);
+
+            //激活一个新的Activity
+            Android.App.Application.Context.StartActivity(intent);
+        }
+
+        public async Task DownloadFileAsync(string url, Action<long, long> action)
+        {
+            var req = new HttpRequestMessage(new HttpMethod("GET"), url);
+            var response = _client.SendAsync(req, HttpCompletionOption.ResponseHeadersRead).Result;
+
+            var allLength = response.Content.Headers.ContentLength;
+            var stream = await response.Content.ReadAsStreamAsync();
+
+            var file = $"{FileSystem.AppDataDirectory}/{"com.masa.mauidemo.apk"}";
+            await using var fileStream = new FileStream(file, FileMode.Create);
+            await using (stream)
+            {
+                var buffer = new byte[10240];
+                var readLength = 0;
+                int length;
+
+                while ((length = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                {
+                    readLength += length;
+                    action(readLength, allLength!.Value);
+                    // 写入到文件
+                    fileStream.Write(buffer, 0, length);
+                }
+            }
+        }
+    }
+}
