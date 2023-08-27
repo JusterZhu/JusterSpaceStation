@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfDataAnnotations.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDataAnnotations"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  Height="25">
+                <TextBlock>ID</TextBlock>
+                <TextBox Width="120" Text="{Binding EmployeeModel.Id,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Height="25">
+                <TextBlock>Name</TextBlock>
+                <TextBox Width="120" Text="{Binding EmployeeModel.Name,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Height="25">
+                <TextBlock>Age</TextBlock>
+                <TextBox Width="120" Text="{Binding EmployeeModel.Age,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="25">
+                <TextBlock>Token</TextBlock>
+                <TextBox Width="120" Text="{Binding EmployeeModel.Token,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Height="25">
+                <TextBlock>Department</TextBlock>
+                <TextBox Width="120" Text="{Binding EmployeeModel.Department,Mode=TwoWay}"></TextBox>
+            </StackPanel>
+            <Button Height="22" Width="120" Content="changed" Command="{Binding ChangedCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
