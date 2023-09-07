@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Linq;
 
     class Program
     {
@@ -24,78 +25,93 @@
 
             //// 将合并后的INI文件保存到磁盘上
             //SaveIniFile(targetFilePath, targetIni);
+            //----------------------------------------------------------------------------------------------------------------------
+            //    // 准备测试数据
+            //    string originalFilePath = "original.ini";
+            //    string targetFilePath = "target.ini";
 
-            // 准备测试数据
-            string originalFilePath = "original.ini";
-            string targetFilePath = "target.ini";
+            //    // 模拟原始INI文件内容
+            //    Dictionary<string, Dictionary<string, string>> originalIni = new Dictionary<string, Dictionary<string, string>>
+            //{
+            //    {
+            //        "Section1", new Dictionary<string, string>
+            //        {
+            //            {"Key1", "Value1"},
+            //            {"Key2", "Value2"}
+            //        }
+            //    },
+            //    {
+            //        "Section2", new Dictionary<string, string>
+            //        {
+            //            {"Key3", "Value3"}
+            //        }
+            //    }
+            //};
 
-            // 模拟原始INI文件内容
-            Dictionary<string, Dictionary<string, string>> originalIni = new Dictionary<string, Dictionary<string, string>>
-        {
-            {
-                "Section1", new Dictionary<string, string>
-                {
-                    {"Key1", "Value1"},
-                    {"Key2", "Value2"}
-                }
-            },
-            {
-                "Section2", new Dictionary<string, string>
-                {
-                    {"Key3", "Value3"}
-                }
-            }
-        };
+            //    // 模拟目标INI文件内容
+            //    Dictionary<string, Dictionary<string, string>> targetIni = new Dictionary<string, Dictionary<string, string>>
+            //{
+            //    {
+            //        "Section1", new Dictionary<string, string>
+            //        {
+            //            {"Key1", "Value1"},
+            //            {"Key2", "Value2"},
+            //            {"Key4", "Value4"} // 不同的值
+            //        }
+            //    },
+            //    {
+            //        "Section3", new Dictionary<string, string>
+            //        {
+            //            {"Key5", "Value5"} // 新的部分
+            //        }
+            //    }
+            //};
 
-            // 模拟目标INI文件内容
-            Dictionary<string, Dictionary<string, string>> targetIni = new Dictionary<string, Dictionary<string, string>>
-        {
-            {
-                "Section1", new Dictionary<string, string>
-                {
-                    {"Key1", "Value1"},
-                    {"Key2", "Value2"},
-                    {"Key4", "Value4"} // 不同的值
-                }
-            },
-            {
-                "Section3", new Dictionary<string, string>
-                {
-                    {"Key5", "Value5"} // 新的部分
-                }
-            }
-        };
+            //    // 模拟预期的差异
+            //    Dictionary<string, Dictionary<string, string>> expectedDiffIni = new Dictionary<string, Dictionary<string, string>>
+            //{
+            //    {
+            //        "Section2", new Dictionary<string, string>
+            //        {
+            //            {"Key3", "Value3"} // 在原始INI文件中但不在目标INI文件中
+            //        }
+            //    },
+            //    {
+            //        "Section3", new Dictionary<string, string>
+            //        {
+            //            {"Key5", "Value5"} // 在目标INI文件中但不在原始INI文件中
+            //        }
+            //    }
+            //};
 
-            // 模拟预期的差异
-            Dictionary<string, Dictionary<string, string>> expectedDiffIni = new Dictionary<string, Dictionary<string, string>>
-        {
-            {
-                "Section2", new Dictionary<string, string>
-                {
-                    {"Key3", "Value3"} // 在原始INI文件中但不在目标INI文件中
-                }
-            },
-            {
-                "Section3", new Dictionary<string, string>
-                {
-                    {"Key5", "Value5"} // 在目标INI文件中但不在原始INI文件中
-                }
-            }
-        };
+            //    // 执行差分合并
+            //    Dictionary<string, Dictionary<string, string>> diffIni = Program.GetIniFileDiff(originalIni, targetIni);
+            //    Program.MergeIniFiles(targetIni, diffIni);
 
-            // 执行差分合并
-            Dictionary<string, Dictionary<string, string>> diffIni = Program.GetIniFileDiff(originalIni, targetIni);
-            Program.MergeIniFiles(targetIni, diffIni);
+            //    // 验证差异是否与预期相符
+            //    //Assert.AreEqual(expectedDiffIni, diffIni);
 
-            // 验证差异是否与预期相符
-            //Assert.AreEqual(expectedDiffIni, diffIni);
+            //    // 验证合并后的INI文件是否包含所有差异
+            //    foreach (var sectionKey in expectedDiffIni.Keys)
+            //    {
+            //        Console.WriteLine($"{expectedDiffIni[sectionKey].Values} , {targetIni[sectionKey]}");
+            //        //CollectionAssert.AreEqual(expectedDiffIni[sectionKey], targetIni[sectionKey]);
+            //    }
 
-            // 验证合并后的INI文件是否包含所有差异
-            foreach (var sectionKey in expectedDiffIni.Keys)
-            {
-                Console.WriteLine($"{expectedDiffIni[sectionKey].Values} , {targetIni[sectionKey]}");
-                //CollectionAssert.AreEqual(expectedDiffIni[sectionKey], targetIni[sectionKey]);
-            }
+            //----------------------------------------------------------------------------------------------------
+
+            // 读取原始XML文件和更新后的XML文件
+            XElement originalXml = XElement.Load("original.xml");
+            XElement updatedXml = XElement.Load("updated.xml");
+
+            XmlDiff xmlDiff = new XmlDiff();
+            // 执行XML文件差分合并
+            XElement mergedXml = xmlDiff.MergeXml(originalXml, updatedXml);
+
+            // 保存合并后的XML文件
+            mergedXml.Save("merged.xml");
+
+            Console.WriteLine("XML文件差分合并完成，并保存为merged.xml。");
         }
 
         static Dictionary<string, Dictionary<string, string>> ParseIniFile(string filePath)
