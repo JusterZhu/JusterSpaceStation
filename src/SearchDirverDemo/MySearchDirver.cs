@@ -18,7 +18,8 @@ namespace SearchDirverDemo
                 {
                     if (IsDriverFile(filePath))
                     {
-                        driverDirectories.Add(Path.GetDirectoryName(filePath));
+                        //driverDirectories.Add(Path.GetDirectoryName(filePath));
+                        driverDirectories.Add(filePath);
                     }
                 }
 
@@ -44,7 +45,8 @@ namespace SearchDirverDemo
         {
             // 此处以文件扩展名为“.sys”，“.dll”和“.inf”为例，实际情况需要根据具体需求判断
             string extension = Path.GetExtension(filePath).ToLower();
-            return extension == ".sys" || extension == ".cat" || extension == ".inf";
+            //extension == ".sys" || extension == ".cat" || 
+            return extension == ".inf";
         }
     }
 }
