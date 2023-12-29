@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,5 +49,38 @@ namespace SearchDirverDemo
             //extension == ".sys" || extension == ".cat" || 
             return extension == ".inf";
         }
+
+        public List<string> GetUniqueFiles(string dirA, string dirB)
+        {
+            var filesA = Directory.GetFiles(dirA, "*", SearchOption.AllDirectories)
+                      .Select(f => f.Substring(dirA.Length))
+                      .ToList();
+
+            var filesB = Directory.GetFiles(dirB, "*", SearchOption.AllDirectories)
+                .Select(f => f.Substring(dirB.Length))
+                .ToList();
+
+            return filesA.Except(filesB).Select(x => dirA + x).ToList();
+        }
+
+        //public List<string> GetUniqueFiles(string dirA, string dirB)
+        //{
+        //    var filesA = Directory.GetFiles(dirA, "*", SearchOption.AllDirectories)
+        //        .ToDictionary(f => f.Substring(dirA.Length), f => GetChecksum(f));
+
+        //    var filesB = Directory.GetFiles(dirB, "*", SearchOption.AllDirectories)
+        //        .ToDictionary(f => f.Substring(dirB.Length), f => GetChecksum(f));
+
+        //    return filesA.Except(filesB).Select(x => Path.Combine(dirA, x.Key)).ToList();
+        //}
+
+        //public byte[] GetChecksum(string file)
+        //{
+        //    using (var stream = new BufferedStream(File.OpenRead(file), 1200000))
+        //    using (var sha = SHA256.Create())
+        //    {
+        //        return sha.ComputeHash(stream);
+        //    }
+        //}
     }
 }

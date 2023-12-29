@@ -6,11 +6,16 @@
         {
             var mySearchDirver = new MySearchDirver();
 
-            string path = @"D:\packet\cache"; // 请将此替换为你要搜索的路径
-            List<string> directories = mySearchDirver.GetAllDriverDirectories(path);
-            foreach (var dir in directories)
+            //string path = @"D:\packet\cache"; // 请将此替换为你要搜索的路径
+            //List<string> directories = mySearchDirver.GetAllDriverDirectories(path);
+            //foreach (var dir in directories)
+            //{
+            //    Console.WriteLine(dir);
+            //}
+
+            foreach (var item in mySearchDirver.GetUniqueFiles("D:\\packet\\source", "D:\\packet\\target"))
             {
-                Console.WriteLine(dir);
+                Console.WriteLine(item);
             }
             Console.Read();
         }
