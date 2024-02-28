@@ -14,8 +14,13 @@ namespace MauiVideoDemo.ViewModels
 
         public MainViewModel() 
         {
-            //D:\github_project\JusterSpaceStation\src\MauiVideoDemo\Platforms\Android\Resources\raw\BigBuckBunny.mp4
-            Url = "https://www.bilibili.com/video/BV1XJ4m1e7WF"; //"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+#if WINDOWS
+            Url = @"C:\Users\zhuzh\Downloads\testvideo.mp4";
+#endif
+
+#if ANDROID 
+            Url = @"embed://testvideo.mp4";
+#endif
         }
     }
 }

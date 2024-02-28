@@ -4,11 +4,11 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MauiVideoDemo.MainPage">
 
-    <ScrollView>
+    <ScrollView> 
         <VerticalStackLayout>
             <toolkit:MediaElement  x:Name="mediaElement" ShouldAutoPlay="True" 
-                                   ShouldShowPlaybackControls="True" Source="{Binding Url}" 
-                                   WidthRequest="400" HeightRequest="300"  />
+                                   ShouldShowPlaybackControls="True" Source="{x:OnPlatform Android=embed://testvideo.mp4 , Default={Binding Url}}" 
+                                   WidthRequest="{x:OnPlatform Android=400,Default=1000}" HeightRequest="{x:OnPlatform Android=300, Default=600}" Aspect="AspectFill"  />
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
                 <Button Text="Start" Clicked="Button_Clicked" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" />
                 <Button Text="Stop" Clicked="Button_Clicked_1" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" Margin="5,0,0,0"/>
