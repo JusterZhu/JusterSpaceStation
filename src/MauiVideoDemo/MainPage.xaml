@@ -5,16 +5,14 @@
              x:Class="MauiVideoDemo.MainPage">
 
     <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition  />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <toolkit:MediaElement  x:Name="mediaElement" ShouldAutoPlay="True" ShouldShowPlaybackControls="True" Source="{Binding Url}" />
-            <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="Center" >
-                <Button Text="Start" Clicked="Button_Clicked" WidthRequest="100" HeightRequest="25" Margin="5" />
-                <Button Text="Stop" Clicked="Button_Clicked_1" WidthRequest="100" HeightRequest="25" Margin="5"/>
+        <VerticalStackLayout>
+            <toolkit:MediaElement  x:Name="mediaElement" ShouldAutoPlay="True" 
+                                   ShouldShowPlaybackControls="True" Source="{Binding Url}" 
+                                   WidthRequest="400" HeightRequest="300"  />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                <Button Text="Start" Clicked="Button_Clicked" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" />
+                <Button Text="Stop" Clicked="Button_Clicked_1" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" Margin="5,0,0,0"/>
             </StackLayout>
-        </Grid>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
