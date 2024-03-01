@@ -6,12 +6,13 @@
 
     <ScrollView> 
         <VerticalStackLayout>
-            <toolkit:MediaElement  x:Name="mediaElement" ShouldAutoPlay="True" 
-                                   ShouldShowPlaybackControls="True" Source="{x:OnPlatform Android=embed://testvideo.mp4 , Default={Binding Url}}" 
+            <toolkit:MediaElement  x:Name="mediaElement" ShouldAutoPlay="True" VerticalOptions="CenterAndExpand"
+                                   ShouldShowPlaybackControls="True" Source="{x:OnPlatform Android=embed://testvideo.mp4 }" 
                                    WidthRequest="{x:OnPlatform Android=400,Default=1000}" HeightRequest="{x:OnPlatform Android=300, Default=600}" Aspect="AspectFill"  />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+            <StackLayout x:Name="StkControl" Orientation="Horizontal" HorizontalOptions="Center" >
                 <Button Text="Start" Clicked="Button_Clicked" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" />
                 <Button Text="Stop" Clicked="Button_Clicked_1" WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" Margin="5,0,0,0"/>
+                <Button Text="Full" x:Name="BtnFull" Clicked="BtnFull_Clicked"  WidthRequest="100" HeightRequest="{x:OnPlatform Android=50 , Default=25}" Margin="5,0,0,0"/>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
