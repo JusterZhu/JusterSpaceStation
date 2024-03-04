@@ -16,7 +16,7 @@ namespace MauiVideoDemo
 
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
-            mediaElement.Source = new Uri(@"C:\\Users\\zhuzh\\Downloads\\testvideo.mp4");
+            mediaElement.Source = new Uri(@"...\\testvideo.mp4");
         }
 
         private void OnUnloaded(object? sender, EventArgs e)
