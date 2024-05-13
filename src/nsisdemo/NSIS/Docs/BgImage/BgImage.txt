@@ -1,0 +1,87 @@
+BgImage.DLL - NSIS扩展DLL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+显示图像或渐变背景，可在NSIS窗口后面显示用户定义的文本和/或图像作为背景。也可以播放WAV声音文件。
+
+请参见Example.nsi以获取用法示例。
+
+用法
+~~~~~
+
+1）调用SetBg来设置背景
+2）调用AddText或AddImage添加文本和图像
+3）调用Redraw来更新背景窗口
+4）可选项-重复步骤2-3以添加更多图像
+           - 或 -
+   调用Clear，然后重复步骤1-3以获取完全新的背景。
+5）当不再需要背景时（例如.onGUIEnd），请调用Destroy。
+
+注意事项
+~~~~~
+
+* 此插件要求NSIS 2.42及以上版本。
+
+* 不要从区段或由区段调用的函数中调用SetBg（创建窗口）。
+  BgImage必须从GUI线程运行，因为安装线程未构建为处理GUI。
+
+可用函数
+~~~~~~~~~~~~~~
+
+SetBg [/ FILLSCREEN | / TILED] path_to_bitmap
+SetBg / GRADIENT R G B R G B
+   设置背景并在必要时创建窗口
+   使用/ FILLSCREEN使图像填充屏幕
+   使用/ TILED设置平铺背景
+   使用/ GRADIENT设置渐变背景
+
+   如果已调用SetReturn on，则在堆栈上返回“success”
+     如果有错误，则返回错误字符串
+
+   不要在.onInit中使用！
+
+AddImage [/ TRANSPARENT R G B] path_to_bitmap X Y
+   在（X，Y）处向背景窗口添加图像
+     X和Y可以为负，以指定距离右侧/底部
+   使用/ TRANSPARENT使BgImage以透明方式绘制图像
+     使用R G B定义透明颜色
+
+   如果已调用SetReturn on，则在堆栈上返回“success”
+     如果有错误，则返回错误字符串
+
+AddText text font_handle R G B X Y X Y
+  向背景窗口添加文本
+  使用NSIS的CreateFont创建字体并将其传递为font_handle
+  使用R G B设置文本颜色
+  第一个X Y用于文本框的左上角
+  第二个X Y用于文本框的右下角
+  X和Y可以为负，以指定距离右侧/底部
+
+  如果已调用SetReturn on，则在堆栈上返回“success”
+     如果有错误，则返回错误字符串
+Clear
+清除当前背景、图像和文本
+
+Destroy
+销毁当前背景窗口
+Destroy 自动调用 Clear
+
+Sound [/WAIT|/LOOP] path_to_wav
+Sound /STOP
+播放音频文件
+使用 /WAIT 等待声音播放完成
+使用 /LOOP 循环播放声音
+使用 Sound /STOP 停止循环
+
+SetReturn on|off
+启用 SetBg、AddImage 和 AddText 的返回值
+默认值为 off，因为所有可能的错误都要么是在调试脚本时需要处理的问题，
+比如“无法加载位图”，要么是您无法解决的问题，比如“内存分配错误”
+
+致谢
+
+编码作者：Amir Szekely，又名 KiCHiK
+文档翻译：水晶石
+Ximon Eighteen，又名 Sunjammer - 修复了窗口标题栏的问题
+iceman_k - 文本创意和原始实现
+Lajos Molnar，又名 orfanik - 创意和原始实现
+Jason Reis - 编码帮助

@@ -1,0 +1,393 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Multi-User Header File (MultiUser.nsh)</title>
+    <style type="text/css">
+body { font-family: Verdana, Arial, Helvetica, sans-serif; color: #000000; background-color: #ffffff; }
+html { font-size: 0.8em; }
+body { font-size: 1em; font-size: 1rem; }
+
+p, li {
+	font-size: 100%;
+}
+h1 {
+	font-size: 170%;
+}
+h2 {
+	font-size: 150%;
+}
+h3 {
+	font-size: 130%;
+}
+h4 {
+	font-size: 120%;
+}
+h5 {
+	font-size: 115%;
+}
+h6 {
+	font-size: 110%;
+}
+pre, code {
+	font-family: Courier New, Courier, monospace,serif; /* code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/ */
+}
+code {
+	font-size: 100%;
+}
+pre {
+	font-size: 100%;
+	background-color: #F7F7F7;
+	padding: 1px;
+}
+pre b {
+	text-decoration: underline;
+}
+a {
+	color: #567599;
+	text-decoration: none;
+}
+a:hover {
+	color: #303030;
+	text-decoration: underline;
+}
+.btitle {
+	color: #000000;
+	text-decoration: none;
+}
+.btitle:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+.wb {
+	color: #000000; background-color: #FFFFD8;
+	border: 1px solid #CECEAA;
+	padding: 0.2em;
+}
+
+:root { color-scheme: light dark; }
+@media (prefers-color-scheme: dark) {
+html, body { color: #eee; background-color:#161616; }
+a, a:link, a:visited, a:active { color: #8ce; } a:hover { color: #29c; }
+.btitle { color: #ccc !important; } .btitle:hover { color: #aaa !important; }
+pre { background-color: #202020; }
+.wb { color: #a6a688; background-color: #454535; border-color: #3b3b30; }
+}
+    </style>
+</head>
+<body>
+<table width="1200" class="maintable" cellspacing="0" cellpadding="30" align="center">
+    <h1>多用户头文件(MultiUser.nsh)</h1>
+    <p><i>Windows 环境下多用户安装程序配置</i></p>
+    <h2>目录</h2>
+    <ul>
+        <li><A href="#introduction">介绍</A>
+        <li><A href="#executionlevel">初始化和执行级别</A>
+            <li><A href="#installationmode">安装模式</A></li></ul>
+    <h2><a name="introduction"></a>介绍</h2>
+    <p>
+        现代 Windows 版本支持一台计算机上的多个用户帐户，每个帐户具有不同的权限。出于安全原因，一部分应用程序的权限需要受到限制。对于安装程序来说，执行级别和安装模式很重要。执行级别决定了安装程序的权限。例如，要安装硬件驱动程序，需要管理员权限。应用程序也可以为单个用户或计算机上的所有用户安装，这是由安装模式决定的。与单个用户设置相比，所有用户的安装需要更高的执行级别。MultiUser.nsh 头文件提供了自动处理用户帐户和安装程序权限相关的所有这些方面的功能。</p>
+    <p>
+    请注意，所有设置都需要在包含 MultiUser.nsh 头文件之前进行设置。</p>
+    <h2>初始化和执行级别</h2>
+    <p>
+       在包含MultiUser.nsh文件之前，应根据所需的执行级别将 MultiUser_EXECUTIONLEVEL 定义设置为以下值之一：</p>
+    <table>
+        <tr>
+            <td>
+                <b>值 </b>
+            </td>
+            <td>
+                <b>描述</b>
+            </td>
+            <td>
+                <b>典型应用</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Admin
+            </td>
+            <td>
+                需要管理员权限
+            </td>
+            <td>
+                访问所有用户帐户的数据
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Power
+            </td>
+            <td>
+                
+需要高级用户权限（高级用户不再存在于 Windows Vista 中。对于 Vista，这相当于管理员）
+            </td>
+            <td>
+               所有用户安装（写入"Program Files" 或  HKLM 注册表键），驱动程序安装
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Highest
+            </td>
+            <td>
+                为当前用户请求尽可能高的执行级别
+            </td>
+            <td>
+               混合模式安装程序，既可以按计算机安装，也可以按用户安装
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Standard
+            </td>
+            <td>
+               无需特殊权限
+            </td>
+            <td>
+               仅供当前用户安装
+            </td>
+        </tr>
+    </table>
+    <p>
+        在 .onInit 和 un.onInit 函数中插入 MULTIUSER_INIT 和 MULTIUSER_UNINT 宏来验证这些权限。如果脚本中没有创建卸载程序，则定义 MULTIUSER_NOUNINSTALL。</p>
+        <pre><code>!define MULTIUSER_EXECUTIONLEVEL Highest
+;!define MULTIUSER_NOUNINSTALL ;如果未创建卸载程序，则取消注释
+!include MultiUser.nsh
+
+...
+
+Function .onInit
+  !insertmacro MULTIUSER_INIT
+FunctionEnd
+
+Function un.onInit
+  !insertmacro MULTIUSER_UNINIT
+FunctionEnd</code></pre>
+    <p>
+        是否可以获得所需的权限取决于启动安装程序的用户:</p>
+    <ul>
+        <li>Windows NT 4/2000/XP/2003为安装程序提供与用户本身相同的权限。如果用户的权限不足（例如，需要设置管理员级别，但用户没有管理员权限），宏将显示错误消息并退出安装程序。
+        <li>Windows Vista 默认限制所有应用程序的权限。根据请求的执行级别，MultiUser.nsh 将设置 RequestExecutionLevel 标志以请求权限。系统将要求用户进行确认并（如有必要）输入管理员密码。
+        <li>Windows 95/98/98 没有对用户或应用程序设置任何限制。管理员权限始终可用。</li>
+    </ul>
+    <p>
+        建议在需要用户干预的宏之前插入这些初始化宏。例如，如果安装程序随后会因为用户帐户没有所需的权限而退出，这时向用户询问安装程序语言是没有任何意义的。插入宏后，变量 $MultiUser.Privileges 将包含当前执行级别（Admin、Power、User 或 Guest）。
+
+</p>
+    <p>
+        以下附加设置可用于自定义初始化：</p>
+    <table>
+        <tr>
+            <td><b>设置</b></td>
+            <td><b>描述</b></td>
+        </tr>
+        <tr>
+            <td>
+                MULTIUSER_INIT_TEXT_ADMINREQUIRED
+            </td>
+            <td>
+                需要管理员权限但不可用时显示的错误消息。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MULTIUSER_INIT_TEXT_POWERREQUIRED
+            </td>
+            <td>
+                当需要高级用户权限但不可用时显示的错误消息。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MULTIUSER_INIT_TEXT_ALLUSERSNOTPOSSIBLE
+            </td>
+            <td>
+              当由于命令行上的安装模式设置（请参见下文）需要管理员或高级用户权限但不可用时，将显示错误消息。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MULTIUSER_USE_PROGRAMFILES64
+            </td>
+            <td>
+                使用$PROGRAMMFILES64而不是$PROGRAMFILES作为默认的所有用户目录。
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MULTIUSER_INIT_FUNCTIONQUIT<br>
+                MULTIUSER_INIT_UNFUNCTIONQUIT
+            </td>
+            <td>
+                由于权限不足而关闭安装程序时要调用的自定义函数。
+            </td>
+        </tr>
+    </table>
+    <h2><a name="installationmode"></a>安装模式</h2>
+    <p>
+       如前所述，既可以为单个用户安装应用程序，也可以为 计算机上的所有用户。所有用户的应用程序通常安装在 “Program Files”文件夹，并显示在每个用户的“开始”菜单中。相反，<br> 单个用户的应用程序通常安装在本地应用程序数据中 文件夹，并且仅出现在安装该应用程序的用户的“开始”菜单中。</p>
+    <p>
+       默认情况下，如果管理员或超级用户权限可用，MultiUser.nsh将为每台计算机的安装设置安装模式（如果执行级别设置为Admin或Power，则始终如此，如果设置为Highest ，则取决于用户帐户）。<br>对于标准执行级别，安装将始终针对单个用户。在Windows 95/98/Me上，无法为单个用户安装，将执行每台计算机的安装。</p>
+    <p>
+       以下设置可用于更改默认安装模式：
+        <table>
+            <tr>
+                <td><b>设置</b></td>
+                <td><b>描述</b></td>
+            </tr>
+            <tr>
+                <td>
+                    MULTIUSER_INSTALLMODE_DEFAULT_CURRENTUSER
+                </td>
+                <td>
+                   将默认设置为每个用户安装，即使每个计算机安装的权限可用。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MULTIUSER_INSTALLMODE_DEFAULT_REGISTRY_KEY<br>
+                    MULTIUSER_INSTALLMODE_DEFAULT_REGISTRY_VALUENAME
+                </td>
+                <td>
+                   安装期间在 HKCU 或 HKLM 中创建非空注册表项。 <br>
+根据密钥的位置，默认安装模式将自动设置为先前选择的模式。
+                </td>
+            </tr>
+        </table>
+        <p>
+          初始化后，变量 $MultiUser.InstallMode 将包含当前
+             安装模式（AllUsers 或 CurrentUser）。
+        </p>
+        <h3>混合安装模式</h3>
+        <p>
+            对于 Admin 和 Power 执行级别，每台机器和每用户安装
+             模式是可能的。 如果设置了最高级别并且用户是管理员或超级用户
+             用户，这两个选项同样可用。</p>
+        <p>
+           通常，让用户在这些选项之间进行选择是一件好事。对于Modern UI 2版本的用户，提供了一个页面，向用户询问安装模式。<br>要使用此页面，请在包含 User.nsh 之前定义 MULTIUSER_MUI。然后，可以像使用普通 ModernUI 页面一样使用MULTIUSER_PAGE_INSTALLMODE 宏（运行Windows 95/98/Me时将自动跳过此页面）:</p>
+        <pre><code>!define MULTIUSER_EXECUTIONLEVEL Highest
+<b>!define MULTIUSER_MUI</b>
+!define MULTIUSER_INSTALLMODE_COMMANDLINE
+!include MultiUser.nsh
+!include MUI2.nsh
+
+<b>!insertmacro MULTIUSER_PAGE_INSTALLMODE</b>
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES 
+
+!insertmacro MUI_LANGUAGE English
+
+...
+
+Function .onInit
+  !insertmacro MULTIUSER_INIT
+FunctionEnd
+
+Function un.onInit
+  !insertmacro MULTIUSER_UNINIT
+FunctionEnd</code></pre>
+        <p>
+            本示例中还显示的 MULTIUSER_INSTALLMODE_COMMANDLINE 设置允许使用 /AllUsers 或 /CurrentUser 命令行参数设置安装模式。这对于静默安装模式特别有用</p>
+        <p>
+            以下设置可用于自定义页面上的文本（常规 Modern UI 页面设置除外）:</p>
+        <table>
+            <tr>
+                <td><b>设置</b></td>
+                <td><b>描述</b></td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODEPAGE_TEXT_TOP</td>
+                <td>要显示在页面顶部的文本。</td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODEPAGE_TEXT_ALLUSERS</td>
+                <td>每个机器安装的单选按钮上显示的文本。</td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODEPAGE_TEXT_CURRENTUSER</td>
+                <td>每个用户安装的单选按钮上显示的文本。</td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODEPAGE_SHOWUSERNAME</td>
+                <td>将用户名附加到每个用户单选按钮。</td>
+            </tr>
+        </table>
+        <h3>安装模式初始化</h3>
+        <p>
+           SetShellVarContext 标志根据安装模式自动设置。 此外，以下设置可用于在初始化安装模式时执行其他操作：</p>
+        <table>
+            <tr>
+                <td><b>设置</b></td>
+                <td><b>描述</b></td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODE_INSTDIR</td>
+                <td>
+                 安装应用程序的文件夹的名称，不带路径。 对于每台机器安装，该文件夹将位于 Program Files 中；对于每用户安装，该文件夹将位于本地 AppData 文件夹中（如果支持）。
+                </td>
+            </tr>
+            <tr>
+                <td>MULTIUSER_INSTALLMODE_INSTDIR_REGISTRY_KEY MULTIUSER_INSTALLMODE_INSTDIR_REGISTRY_VALUENAME</td>
+                <td>
+                    从中获取以前存储的安装文件夹的注册表项。 它将从每个用户的 HKCU 和每台机器的 HKLM 中检索。
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MULTIUSER_INSTALLMODE_FUNCTION<br>
+                    MULTIUSER_INSTALLMODE_UNFUNCTION
+                </td>
+                <td>
+                 在安装模式初始化期间调用的自定义函数，用于设置依赖于模式的其他安装程序设置
+                </td></tr>
+        </table>
+        <p>
+            要手动设置安装模式，请调用以下四个函数之一:</p>
+        <table>
+            <tr>
+                <td>
+                    <b>函数名</b>
+                </td>
+                <td>
+                    <b>安装模式</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MultiUser.InstallMode.AllUsers
+                </td>
+                <td>
+                   安装: 每计算机(Per-machine)模式
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MultiUser.InstallMode.CurrentUser
+                    <td>
+                       安装:每用户(Per-user)模式
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    un.MultiUser.InstallMode.AllUsers<td>
+                        卸载:每计算机(Per-machine)模式
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    un.MultiUser.InstallMode.CurrentUser<td>
+                        卸载: 每用户(Per-user) 模式
+                    </td>
+            </tr>
+        </table
+        <li>
+        <p align="right">
+         <A href="https://www.cnblogs.com/nsis/">水晶石</A>  2022.12.29
+          </p>
+		</li>  
+</body>
+</html>

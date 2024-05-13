@@ -1,0 +1,44 @@
+nsExec
+------
+nsExec 将执行基于命令行的程序并在不打开 DOS 框的情况下捕获输出。
+
+
+用法
+-----
+nsExec::Exec [/MBCS] [/OEM] [/TIMEOUT=x] 路径
+Pop $0
+
+-或者-
+
+nsExec::ExecToLog [/MBCS] [/OEM] [/TIMEOUT=x] 路径
+Pop $0
+
+-或者-
+
+nsExec::ExecToStack [/MBCS] [/OEM] [/TIMEOUT=x] 路径
+Pop $0 ; 返回值
+Pop $1 ; 输出
+
+所有函数功能大体相同，其中 ExecToLog 会将输出信息到日志窗口，ExecToStack 将最多${NSIS_MAX_STRLEN}返回后的输出字符推入堆栈。
+
+使用 /MBCS 开关禁用 Unicode 检测并始终将文本视为 ANSI。
+
+使用 /OEM 开关将输出文本从 OEM 转换为 ANSI。
+
+超时值是可选的。超时是指 nsExec 等待输出的时间（以毫秒为单位）。如果收到进程的输出，超时值将被重置，它将再次使用超时值等待更多输出。有关如何检查是否存在超时的 信息，请参阅返回值。
+
+为确保命令在所有 Windows 版本上都能正常执行，建议使用以下语法：
+
+   nsExec::ExecToStack [OPTIONS] '"PATH" param1 param2 paramN'
+
+这样应用程序路径可能包含非8.3 路径（带空格）
+
+返回值
+------------
+如果 nsExec 无法执行进程，它将在堆栈顶部返回“error”，如果进程超时则返回“timeout”，否则返回已执行进程的返回码。
+
+
+版权信息
+--------------
+Copyright (c) 2002 Robert Rainwater
+Thanks to Justin Frankel and Amir Szekely

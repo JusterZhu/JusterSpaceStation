@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Dialer插件帮助文档</title>
+	<style>
+		h1 {
+			text-align: center;
+		}
+		h2 {
+			text-align: left;
+		}
+		hr {
+			border: 1px solid black;
+		}
+		body {
+			max-width: 70%;
+			margin: 0 auto;
+			border: 1px solid black;
+			padding: 10px;
+		}
+		  a { color: #0033FF; } /* CSS link color */
+	</style>
+</head>
+<body>
+	<h1>DIALER插件</h1>
+	<hr>
+	<p>作者：Amir Szekely aka KiCHiK</p>
+	<p>Readme作者：Joost Verburg</p>
+	<p>文档制作翻译：<A href="https://www.cnblogs.com/nsis/">水晶石</A></p>
+	<p>Dialer插件提供了与互联网连接相关的5个函数。</p>
+	<p>要从互联网下载文件，请使用NSISdl插件。</p>
+	<h2>用法</h2>
+	<p>使用示例：</p>
+	<pre>
+ClearErrors           ;清除错误标志
+Dialer::FunctionName  ;调用Dialer函数
+IfErrors "" +3        ;检查错误
+  MessageBox MB_OK "Function not available"
+  Quit
+Pop $R0               ;从堆栈中获取返回值
+MessageBox MB_OK $R0  ;显示返回值
+	</pre>
+	<h2>示例函数</h2>
+	<pre>
+; ConnectInternet (使用Dialer插件)
+; 作者：Joost Verburg 
+;
+; 如果没有连接可用，此函数尝试连接到互联网。
+; 如果您不确定使用安装程序的系统是否有活动的互联网连接，请在使用NSISdl下载文件之前调用此函数。
+; 
+; 此函数需要Internet Explorer 3，但如果未安装IE3，则会要求手动连接。
+Function ConnectInternet
+Push $R0
+
+ClearErrors
+Dialer::AttemptConnect
+IfErrors noie3
+
+Pop $R0
+StrCmp $R0 "online" connected
+MessageBox MB_OK|MB_ICONSTOP "Cannot connect to the internet."
+Quit ;删除此行以使错误不致命
+
+noie3:
+
+; IE3未安装
+MessageBox MB_OK|MB_ICONINFORMATION "Please connect to the internet now."
+
+connected:
+Pop $R0
+
+FunctionEnd
+</pre>
+
+<h2>函数</h2>
+<p>如果系统上不存在某个函数，则会设置错误标志。</p>
+<ul>
+<li><strong>AttemptConnect</strong> - 尝试连接到互联网（如果系统未连接）。</li>
+<p>返回值：</p>
+<ul>
+<li>online - 已连接 / 连接成功</li>
+<li>offline - 连接失败</li>
+</ul>
+<p>需要Internet Explorer 3或更高版本。</p>
+<li><strong>AutodialOnline</strong> - 如果系统未连接到互联网，则使调制解调器自动拨号到默认的Internet连接。</li>
+<p>如果系统未设置为自动连接，则会提示用户。</p>
+<p>返回值：</p>
+<ul>
+<li>online - 已连接 / 连接成功</li>
+<li>offline - 连接失败</li>
+</ul>
+<p>需要Internet Explorer 4或更高版本。</p>
+
+<li><strong>AutodialUnattended</strong> - 如果系统未连接到互联网，则使调制解调器自动拨号默认的Internet连接。</li>
+<p>不会提示用户。</p>
+<p>返回值：</p>
+<ul>
+<li>online - 已连接 / 连接成功</li>
+<li>offline - 连接失败</li>
+</ul>
+<p>需要Internet Explorer 4或更高版本。</p>
+<li><strong>AutodialHangup</strong> - 断开自动拨号连接。</li>
+<p>返回值：</p>
+<ul>
+<li>success - 断开连接成功</li>
+<li>failure - 断开连接失败</li>
+</ul>
+<p>需要Internet Explorer 4或更高版本。</p>
+<li><strong>GetConnectedState</strong>
+<p>检查系统是否连接到互联网。</p>
+<p>返回值：</p>
+<ul>
+<li>online - 系统在线</li>
+<li>offline - 系统离线</li>
+</ul>
+<p>需要Internet Explorer 4或更高版本。</p>
+</body>
+
+
+

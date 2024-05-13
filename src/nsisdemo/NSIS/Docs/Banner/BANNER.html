@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title style="text-align: center; font-size: 90%;">NSIS插件使用说明</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        margin: 0 auto;
+        width: 60%;
+        border: 1px solid blue;
+        padding: 10px;
+        font-family: '微软雅黑', sans-serif;
+        font-size: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center;">BANNER插件</h1>
+      <p>该插件显示一个带有可定制文本的横幅。它使用UI的IDD_VERIFY对话框。</p>
+      <p>有三个函数 - show、getWindow和destroy。</p>
+      <h2>使用方法</h2>
+      <p>Banner::show "要显示的文本"</p>
+      <p>[可选] Banner::getWindow</p>
+      <p>Banner::destroy</p>
+      <p>请参阅Example.nsi获取示例。</p>
+      <h2>Modern UI</h2>
+      <p>现代UI在IDD_VERIFY对话框上有两个标签。要更改所有文本，请使用：</p>
+      <p>Banner::show /set 76 "文本1（替换为请等待，直到安装加载...）" "普通文本"</p>
+      <h2>自定义UI</h2>
+      <p>如果您的IDD_VERIFY对话框上有更多标签，可以使用多个/set参数来更改文本。</p>
+      <p>例如：</p>
+      <p>Banner::show /set 76 "bah #1" /set 54 "bah #2" "普通文本"</p>
+      <p>/set的第二个参数是控件的ID。</p>
+      <h2>更多技巧</h2>
+      <p>如果您使用/set来设置主字符串（IDC_STR，1030），则可以为窗口的标题和主字符串指定不同的字符串。</p>
+      <p>如果您将空字符串用作主字符串（Banner::show“”），则横幅窗口将不会显示在任务栏上。</p>
+      <h2>致谢</h2>
+      <p>这是brainsucker和kichik共同努力的成果。</p>
+    </div>
+  </body>
+</html>
