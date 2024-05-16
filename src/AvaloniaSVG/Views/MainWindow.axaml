@@ -1,0 +1,31 @@
+<Window
+    x:Class="AvaloniaSVG.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AvaloniaSVG.ViewModels"
+    Title="AvaloniaSVG"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <StreamGeometry x:Key="building_shop_regular">
+            M982.877091 554.344727 512 47.255273 41.122909 554.344727c-8.738909 9.425455-8.203636 24.145455 1.221818 32.896 9.425455 8.738909 24.145455 8.203636 32.896-1.210182L512 115.653818l436.759273 470.365091C953.355636 590.952727 959.581091 593.454545 965.818182 593.454545c5.666909 0 11.357091-2.059636 15.837091-6.213818C991.069091 578.490182 991.616 563.758545 982.877091 554.344727z M861.090909 558.545455c-12.846545 0-23.272727 10.426182-23.272727 23.272727l0 349.090909L465.454545 930.909091 465.454545 756.363636l116.363636 0c12.846545 0 23.272727-10.426182 23.272727-23.272727s-10.426182-23.272727-23.272727-23.272727L442.181818 709.818182c-12.846545 0-23.272727 10.426182-23.272727 23.272727l0 197.818182L174.545455 930.909091 174.545455 581.818182c0-12.846545-10.426182-23.272727-23.272727-23.272727s-23.272727 10.426182-23.272727 23.272727l0 372.363636c0 12.846545 10.426182 23.272727 23.272727 23.272727l709.818182 0c12.846545 0 23.272727-10.426182 23.272727-23.272727L884.363636 581.818182C884.363636 568.971636 873.937455 558.545455 861.090909 558.545455z
+        </StreamGeometry>
+    </Window.Resources>
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <PathIcon
+        Width="200"
+        Height="200"
+        Data="{StaticResource building_shop_regular}"
+        Foreground="Blue" />
+</Window>
