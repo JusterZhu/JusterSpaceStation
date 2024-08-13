@@ -31,7 +31,8 @@ public class UpgradeHub
 
         _connection.On<string, string>("ReceiveMessage", (user, message) =>
         {
-            Console.WriteLine($"{user}: {message}");
+            var obj = JsonConvert.DeserializeObject<PushDTO>(message);
+            Console.WriteLine($"{user}: {obj.Name}");
         });
     }
 
@@ -44,5 +45,28 @@ public class UpgradeHub
     public async Task SendMessageAsync(string user, string message)
     {
         await _connection.InvokeAsync("SendMessage", user, message);
+    }
+
+    public class PushDTO
+    {
+        public string? Name { get; set; }
+
+        public string Hash { get; set; } = null!;
+
+        public DateTime? ReleaseDate { get; set; }
+
+        public string? Url { get; set; }
+
+        public string? Version { get; set; }
+
+        public int? AppType { get; set; }
+
+        public int? Platform { get; set; }
+
+        public string? ProductId { get; set; }
+
+        public bool? IsForcibly { get; set; }
+
+        public bool? IsFreeze { get; set; }
     }
 }
