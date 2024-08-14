@@ -1,0 +1,45 @@
+Splash.dll-small（4k），可以让您
+
+在NSIS安装程序中启动“启动画面”。
+
+--- UPDATED in 2.0b0 - will break old scripts ---
+
+用法:
+
+创建启动的.BMP文件。
+
+（可选）创建一个.WAV文件，在启动屏幕显示时播放。
+
+将以下代码添加到.NSI文件中：
+
+Function .onInit
+  SetOutPath $TEMP
+  File /oname=spltmp.bmp "my_splash.bmp"
+
+; 可选择项
+; File /oname=spltmp.wav "my_splashsound.wav"
+
+  splash::show 1000 $TEMP\spltmp
+
+  Pop $0
+ ; 如果用户提前关闭启动屏幕，$0 的值为“1”，
+
+;如果一切正常关闭，值为“0”；如果发生错误，值为“-1”。
+
+  Delete $TEMP\spltmp.bmp
+;  Delete $TEMP\spltmp.wav
+FunctionEnd
+
+Note that the first parameter to splash.exe is the length to show the
+screen for (in milliseconds), and the second is the splash bitmap filename (without
+the .bmp). The BMP file used will be this parameter.bmp, and the wave file used
+(if present) will be this parameter.wav.
+
+(If you already have an .onInit function, put that in it)
+
+Note: the return value of splash is 1 if the user closed the splash 
+screen early (pop it from the stack)
+
+-Justin
+
+Converted to a plugin DLL by Amir Szekely (kichik)

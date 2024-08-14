@@ -1,0 +1,166 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<html lang="zh-CN" <head><title>NewAdvSplash 插件 - NSIS</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<STYLE>
+
+html, body { font-family: 微软雅黑, Arial, Helvetica, sans-serif; color: #000000; background-color: #ffffff; }
+html { font-size: 0.8em; }
+body { font-size: 1em; font-size: 1rem; }
+
+p, li {
+	font-size: 100%;
+}
+h1 {
+	font-size: 170%;
+}
+h2 {
+	font-size: 150%;
+}
+h3 {
+	font-size: 130%;
+}
+h4 {
+	font-size: 120%;
+}
+h5 {
+	font-size: 115%;
+}
+h6 {
+	font-size: 110%;
+}
+pre, code {
+	font-family: Courier New, Courier, monospace,serif; /* code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/ */
+}
+code {
+	font-size: 100%;
+}
+pre {
+	font-size: 100%;
+	background-color: #F7F7F7;
+	padding: 1px;
+}
+pre b {
+	text-decoration: underline;
+}
+a {
+	color: #567599;
+	text-decoration: none;
+}
+a:hover {
+	color: #303030;
+	text-decoration: underline;
+}
+.btitle {
+	color: #000000;
+	text-decoration: none;
+}
+.btitle:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+.wb {
+	color: #000000; background-color: #FFFFD8;
+	border: 1px solid #CECEAA;
+	padding: 0.2em;
+}
+.maintable
+        {
+        border-radius: 10px;
+        border: 2px double #808080;
+        }
+:root { color-scheme: light dark; }
+@media (prefers-color-scheme: dark) {
+html, body { color: #eee; background-color:#161616; }
+a, a:link, a:visited, a:active { color: #8ce; } a:hover { color: #29c; }
+.btitle { color: #ccc !important; } .btitle:hover { color: #aaa !important; }
+pre { background-color: #202020; }
+.wb { color: #a6a688; background-color: #454535; border-color: #3b3b30; }
+}
+</body>
+ 
+</STYLE>
+</head>
+
+<table width="1200" class="maintable" cellspacing="0" cellpadding="30" align="center">
+<tr>
+<td>
+ 
+	  	  <center><h1><STRONG>NewAdvSplash plug-in</STRONG></h1></center>
+	
+<p align="right">
+作者：<A title=用户：塔基尔 href="https://nsis.sourceforge.io/User:Takhir">Takhir</A></p>
+
+<h2>目录</h2>
+<ul>
+
+<li ><A href="#Description">说明</A>
+<li><A href="#Installing">安装</A>
+<li><A href="#Entry_points_and_parameters_.28NSIS_script.29">入口点和参数（NSIS脚本）</A>
+<li ><A href="#Examples">例子</A></li>
+</ul>
+</div>
+
+<h2>说明<a name="Description"></a></h2>
+<p>NewAdvSplash.dll - 具有淡入淡出效果 (win2k/xp) 和透明度的启动图像横幅插件。同时可以播放声音文件，允许后台安装程序初始化（异步横幅模式）；gif、jpeg 和其他一些 OleLoadPicture() 格式； 使用"passive"模式不强制 spalsh 窗口到前台；可以返回 splash 句柄以在异步模式下与其他插件（Marquee、AnimGif）一起工作。包含 Unicode 版本。兼容性：Win95 及更高版本，淡入/淡出：win2k/winxp 及更高版本。
+</p>
+<h2>安装<a name="Installing"></a></h2>
+<p>将 newadvsplashu.zip 解压缩到NSIS根目录（Plugins\x86-ansi或\x86-unicode）。</p>
+<h2>入口点和参数（NSIS 脚本）<a name="Entry_points_and_parameters_.28NSIS_script.29"></a></h2>
+<pre>newadvsplash::show [/NOUNLOAD] Delay FadeIn FadeOut KeyColor</pre>
+<dl><dt>Delay
+<dd>显示图像的时间（毫秒）</dd></dl>
+<dl>FadeIn
+<dd>展示淡入场景</dd></dl>
+<dl><dt>FadeOut
+<dd>展示淡出场景</dd></dl>
+<dl><dt>KeyColor
+<dd>用于透明度的颜色，可以是任何 RGB 值（例如 R=255 G=100 B=16 那么KeyColor=0xFF6410），如果图像中没有透明颜色，则使用 KeyColor=-1。如果 KeyColor=-2 并且图像类型是 gif，插件会尝试从文件头中提取透明度颜色值。对于 gif 图像，即使 KeyColor=-1，静态背景上的透明度也有效。</dd></dl>
+<dl><dt>/BANNER
+<dd>插件激活后立即将控制权返回给安装程序。</dd></dl>
+<dl><dt>/NOCANCEL
+<dd>禁用用户点击“退出”的默认行为。</dd></dl>
+<dl><dt>/PASSIVE
+<dd>不强制启动窗口到前台</dd></dl>
+<dl><dt>文件名
+<dd>初始图像文件名（带扩展名！）。支持 Bmp、gif 和 jpg 图像类型。</dd></dl>
+<p><br>
+</p>
+<pre>newadvsplash::stop  [/WAIT | /FADEOUT]</pre>
+<dl><dd>该函数仅适用于 /BANNER 模式！没有横幅终止的选项
+<dd>使用 /WAIT 选项等待结束
+<dd>使用 /FADEOUT 选项强制关闭带有淡出效果的横幅（“延迟”-&gt; 0）。</dd></dl>
+<p><br>
+</p>
+<pre>newadvsplash::play /NOUNLOAD [/LOOP] 文件名
+</pre>
+<dl><dt>文件名
+<dd>要播放的声音文件名（带有扩展名，wav ...）。空文件名字符串 "" 停止播放（'show' 结束也是如此）。</dd></dl>
+<dl><dt><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">/LOOP</font></font>
+<dd>循环播放声音。</dd></dl>
+<p><br>
+</p>
+<pre>newadvsplash::hwnd
+</pre>
+<dl><dd>获取启动窗口句柄（使用 Pop 从堆栈中获取）</dd></dl>
+<h2>例子<a name="Examples"></a></h2>
+<p>带声音图像模式
+</p>
+<pre class="nsis" style="FONT-FAMILY: monospace">     <span style="COLOR: #000099"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">newadvsplash</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> :: </font></font><span style="COLOR: #003399"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">play</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> /NOUNLOAD /LOOP </font></font><span style="COLOR: #660066"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">"$PLUGINSDIR\snd.wav" </font></font></span>
+     <span style="COLOR: #000099"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">newadvsplash</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> :: </font></font><span style="COLOR: #003399"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">show</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> /NOUNLOAD </font></font><span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">2000 </font></font></span> <span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">1000 </font></font></span> <span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">500</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> - </font></font><span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">2</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> /BANNER </font></font><span style="COLOR: #660066"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">"$PLUGINSDIR\logo.gif" </font></font></span>
+     <span style="COLOR: #666666; FONT-STYLE: italic"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">; </font><font style="VERTICAL-ALIGN: inherit">在此处添加您的初始化代码</font></font></span>
+     <span style="COLOR: #000099"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">newadvsplash</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> :: </font></font><span style="COLOR: #003399"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">stop</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> /WAIT</font></font></pre>
+<p><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">简单图像标志
+</font></font></p>
+<pre class="nsis" style="FONT-FAMILY: monospace">     <span style="COLOR: #000099"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">newadvsplash</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> :: </font></font><span style="COLOR: #003399"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">show </font></font></span><span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">2000 </font></font></span> <span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">1000 </font></font></span> <span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">500</font></font></span><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit"> - </font></font><span ><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">1 </font></font></span> <span style="COLOR: #660066"><font style="VERTICAL-ALIGN: inherit"><font style="VERTICAL-ALIGN: inherit">"$PLUGINSDIR\logo.jpg"</font></font></span></pre>
+<p>没有返回值。
+<p align="right"><A href="https://www.cnblogs.com/nsis/">水晶石</A>  2023.1.18</p>
+
+</td>
+</tr>
+</TABLE>
+</html>

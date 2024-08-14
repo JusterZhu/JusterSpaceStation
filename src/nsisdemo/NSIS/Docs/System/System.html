@@ -1,0 +1,950 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>System Plug-in (NSIS)</title>
+<style>
+html, body { font-family: 微软雅黑, Arial, Helvetica, sans-serif; color: #000000; background-color: #ffffff; }
+html { font-size: 0.8em; }
+body { font-size: 1em; font-size: 1rem; }
+
+p, li {
+	font-size: 100%;
+}
+h1 {
+	font-size: 170%;
+}
+h2 {
+	font-size: 150%;
+}
+h3 {
+	font-size: 130%;
+}
+h4 {
+	font-size: 120%;
+}
+h5 {
+	font-size: 115%;
+}
+h6 {
+	font-size: 110%;
+}
+pre, code {
+	font-family: Courier New, Courier, monospace,serif; /* code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/ */
+}
+code {
+	font-size: 100%;
+}
+pre {
+	font-size: 100%;
+	background-color: #F7F7F7;
+	padding: 1px;
+}
+pre b {
+	text-decoration: underline;
+}
+a {
+	color: #567599;
+	text-decoration: none;
+}
+a:hover {
+	color: #303030;
+	text-decoration: underline;
+}
+.btitle {
+	color: #000000;
+	text-decoration: none;
+}
+.btitle:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+.wb {
+	color: #000000; background-color: #FFFFD8;
+	border: 1px solid #CECEAA;
+	padding: 0.2em;
+}
+.maintable
+        {
+        border-radius: 10px;
+        border: 2px dotted #808080;
+        }
+:root { color-scheme: light dark; }
+@media (prefers-color-scheme: dark) {
+html, body { color: #eee; background-color:#161616; }
+a, a:link, a:visited, a:active { color: #8ce; } a:hover { color: #29c; }
+.btitle { color: #ccc !important; } .btitle:hover { color: #aaa !important; }
+pre { background-color: #202020; }
+.wb { color: #a6a688; background-color: #454535; border-color: #3b3b30; }
+}
+</style>
+</head>
+<body>
+<table width="1200" class="maintable" cellspacing="0" cellpadding="30" align="center">
+<tr>
+<td>
+<center><h1><STRONG>NSIS System 插件</STRONG></h1></center>
+<p align="right">
+<i>版权所有 © 2002 brainsucker (Nik Medved)</i><br><br><i>版权所有 © 2002-2021 NSIS 贡献者</i>
+</p>
+
+<h2>目录</h2>
+
+<ul>
+<li><A href="#intro">介绍</A>
+<li>
+<A href="#funcs">可用函数</A>
+<ul>
+<li><A href="#memfuncs">内存相关函数</A>
+<li><A href="#callfuncs">调用函数</A>
+<li><A href="#64bitfuncs">64-bit 函数</A></li>
+</ul>
+<li><A href="#faq">FAQ</A></li>
+</ul>
+
+<h2><a name="intro"></a>介绍</h2>
+
+<p>System 插件使开发人员能够从任何 DLL 调用任何导出的函数。 例如，您可以使用它调用 <A href="https://msdn.microsoft.com/en-us/library/aa364975">GetLogicalDriveStrings</A> 以获取用户计算机上可用驱动器的列表。</p>
+
+<p>System 插件还允许开发人员分配、释放和复制内存； 与 COM 对象交互并对 64 位整数执行数学运算。</p>
+
+<p>强烈建议您具备编程知识，以便更好地理解 System 插件。</p>
+
+
+<h2><a name="funcs"></a>可用函数</h2>
+
+<h3><a name="memfuncs"></a>内存相关函数</h3>
+
+<div>
+<ul>
+
+<li>
+<b>Alloc</b> <i>SIZE</i>
+<blockquote>
+<p>分配 <i>SIZE</i> 字节并返回一个内存地址到堆栈上。</p>
+<h4>使用范例</h4>
+<blockquote><pre>
+System::<b>Alloc</b> 64
+Pop $0
+DetailPrint "64字节分配到 $0"
+System::Free $0
+</pre></blockquote>
+</blockquote>
+<li>
+<b>StrAlloc</b> <i>SIZE</i>
+<blockquote>
+<p>为 <i>SIZE</i> <b>TCHARs</b> 分配一个字符串缓冲区并返回堆栈上的内存地址。 如果您想编写一个适用于 ANSI 或者 Unicode NSIS 的 NSI 脚本，这将非常有用。</p>
+<h4>例如</h4>
+<blockquote><pre>
+System::<b>StrAlloc</b> 64 ; 用于 63 个字符加 \0 终止符的字符串缓冲区。
+Pop $0
+DetailPrint "64个字符的字符串缓冲区分配到 $0"
+System::Free $0
+</pre></blockquote>
+</blockquote>
+<li>
+<b>Copy</b> [/<i>SIZE</i>] <i>DESTINATION</i> <i>SOURCE</i>
+<blockquote>
+<p>将 <i>SIZE</i> 个字节从 <i>SOURCE</i> 复制到 <i>DESTINATION</i>。 如果未指定 <i>SIZE</i>，则 <i>SOURCE</i> 的大小将使用 GlobalSize 查询。 这意味着如果您不使用 System::Alloc、System::Call 或 GlobalAlloc 分配 <i>SOURCE</i>，则必须指定 <i>SIZE</i>。 如果 <i>DESTINATION</i> 为零，它将被分配并将其地址压入堆栈。</p>
+<h4>例如</h4>
+<blockquote><pre>
+# 分配一个缓冲区并在其中放入“test string”字符串和一个 int 整数
+System::Call "*(&amp;t1024 'test string', i 5) p .s"
+Pop $0
+# 复制到自动创建的缓冲区
+System::<b>Copy</b> 0 $0
+Pop $1
+# 在 $1 缓冲区中获取字符串和整数
+System::Call "*$1(&amp;t1024 .r2, i .r3)"
+# 释放缓冲区
+System::Free $1
+# 输出结果
+DetailPrint $2
+DetailPrint $3
+# 复制到我们自己的缓冲区
+System::Alloc 1028
+Pop $1
+System::<b>Copy</b> $1 $0
+# 在$1缓冲区中获取字符串和 int
+System::Call "*$1(&amp;t1024 .r2, i .r3)"
+# 释放
+System::Free $0
+System::Free $1
+#输出结果
+DetailPrint $2
+DetailPrint $3
+</pre></blockquote>
+</blockquote>
+
+<li>
+<b>Free</b> <i>ADDRESS</i>
+<blockquote>
+<p>释放 <i>ADDRESS (内存地址)</i>.</p>
+<h4>例子</h4>
+<blockquote><pre>
+System::Alloc 64
+Pop $0
+DetailPrint "64个字节分配到了 $0"
+System::<b>Free</b> $0
+</pre></blockquote>
+</blockquote>
+
+<li>
+<b>Store</b> "<i>OPERATION</i> [<i>OPERATION</i> [<i>OPERATION</i> ...]]"
+<blockquote>
+<p>执行堆栈操作。 操作可以是从 NSIS 堆栈中压入或弹出单个变量，也可以是从系统的私有堆栈中压入或弹出所有寄存器变量（$0-$9 和 $R0-$R9）。 操作可以用任何字符分隔。</p>
+<h4>可用操作</h4>
+<ul>
+<li>要压入 $<i>#</i>，请使用 p<i>#</i>，其中 <i>#</i> 是0到9的数字。
+            
+<li>要弹出 $<i>#</i>，请使用 r<i>#</i>，其中 <i>#</i> 是从 0 到 9 的数字。
+            
+<li>要压入 $R<i>#</i>，请使用 P<i>#</i>，其中 <i>#</i> 是从 0 到 9 的数字。
+            
+<li>要弹出 $R<i>#</i>，请使用 R<i>#</i>，其中 <i>#</i> 是从 0 到 9 的数字。
+            
+<li>将 $0-$9 和 $R0-$R9 压入系统的私有堆栈，请使用 s 或 S。
+            
+<li>要从系统的私有堆栈中弹出 $0-$9 和 $R0-$R9，请使用 l 或 L。
+            
+<li>要将 NSIS 内部定义标志 <small>(api.h 里的 exec_flags_t)</small> 推送到堆栈，请使用 F。
+            
+<li>要从堆栈中弹出 NSIS 内部定义标志<small>(api.h 里的 exec_flags_t)</small>，请使用 f。</li>
+</ul>
+<h4>例子</h4>
+<blockquote><pre>
+StrCpy $0 "test"
+System::<b>Store</b> "p0"
+Pop $1
+DetailPrint "$0 = $1"
+</pre></blockquote>
+<blockquote><pre>
+StrCpy $2 "test"
+System::<b>Store</b> "p2 R2"
+DetailPrint "$2 = $R2"
+</pre></blockquote>
+<blockquote><pre>
+StrCpy $3 "test"
+System::<b>Store</b> "s"
+StrCpy $3 "另一个测试"
+System::<b>Store</b> "l"
+DetailPrint $3
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Store</b> "r4" "测试"
+DetailPrint $4
+</pre></blockquote>
+</blockquote>
+</li>
+</ul>
+
+</div>
+
+<h3><a name="callfuncs"></a>调用函数</h3>
+
+<div>
+
+<ul>
+<li><b>Call</b> <i>PROC</i> [( <i>PARAMS</i> ) [<i>RETURN</i> [? <i>OPTIONS</i>]]] 
+        
+<li><b>Get</b> <i>PROC</i> [( <i>PARAMS</i> ) [<i>RETURN</i> [? <i>OPTIONS</i>]]]
+<blockquote>
+<p>Call 和 get 共享一个通用语法。 顾名思义，Call 调用 Get 获取。 它 Call 什么或 Get 什么取决于 <i>PROC</i> 的值。</p>
+
+<p><i>PARAMS</i> 是参数列表以及如何处理这些列表。 您可以在参数中传递数据，也可以从中获取数据。 参数列表以逗号分隔。 每个参数由三个值组合而成：<i>type</i>、<i>source</i> 和 <i>destination</i>。 <i>Type</i> 可以是整数，字符串等。 <i>Source</i>，也就是参数值的源，可以是NSIS寄存器变量（$0, $1, $INSTDIR）， NSIS 堆栈，具体值（5、“test”等）或什么都没有（null）。 <i>Destination</i>是调用返回后参数值的目标，可以是一个 NSIS 
+          寄存器变量，NSIS 栈或者什么都不需要输出。 如果不需要，<i>source</i> 或 <i>destination</i> 之一也可以是点 (`.')。</p>
+
+<p><i>RETURN</i> 就像一个单一的参数定义，但 <i>source</i> 只在创建回调函数时使用。 通常 <i>source</i> 是一个点。</p>
+
+<p><i>OPTIONS</i> 是控制 System 插件行为方式的选项列表。 每个选项都可以通过在前面加上感叹号来关闭。 例如：<b>?!e</b>。</p>
+
+<p><i>PARAMS</i>、<i>RETURN</i> 和<i>OPTIONS</i> 可以在一个 Get/Call 行中重复多次。 这样重复的时候可以省很多事，只改自己想改的就行。 <i>Type</i>、<i>source</i> 和/或 <i>destination</i> 可以省略每个参数，甚至是返回值。 可以添加或删除选项。 这允许您定义函数原型并节省一些输入。 <A href="#repeat">最后两个例子</A>展示了这一点。</p>
+
+<p><i>PROC</i> 也可以重复，但它必须以井号 (`#') 为前缀，井号前面有双冒号 (<code>shell32::#18</code>) 的情况下，它会被解释为函数序数。</p>
+
+<h4> <i>PROC</i> 可能的值和含义</h4>
+
+<blockquote>
+<table>
+<tr>
+<th>值</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+<tr>
+<th><i>DLL</i>::<i>FUNC</i></th>
+<td>从 <i>DLL</i> 导出的 <i>函数</i></td>
+<td><A href="#func">user32::MessageBox</A></td>
+</tr>
+<tr>
+<th>::<i>ADDR</i></th>
+<td>地址为<i>ADDR</i>的函数</I></td>
+<td><A href="#funcaddr">见下文</A></td>
+</tr>
+<tr>
+<th>*<i>ADDR</i></th>
+<td>地址为<i>ADDR</i>的结构</I></td>
+<td><A href="#structaddr">见下文</A></td>
+</tr>
+<tr>
+<th>*</th>
+<td>新结构 </td>
+<td><A href="#newstruct">见下文</A></td>
+</tr>
+<tr>
+<th><i>IPTR</i>-&gt;<i>IDX</i></th>
+<td> <br><i>IPTR</i> 指向的接口的<br>成员索引<i>IDX</i></td>
+<td><A href="#com">见下文</A></td>
+</tr>
+<tr>
+<th>&lt;nothing&gt;</th>
+<td>新回调函数</td>
+<td><A href="#callback">见下文</A></td>
+</tr>
+<tr>
+<th><i>PROC</i></th>
+<td> Get 返回的<i>PROC</i></td>
+<td><A href="#get">见下文</A></td>
+</tr>
+</table>
+</blockquote>
+
+<h4>可用参数类型</h4>
+
+<blockquote>
+<table>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+<tr>
+<th>v</th>
+<td>void (无类型，常用于返回)</td>
+<td></td>
+</tr>
+<tr>
+<th>p</th>
+<td>指针（以及其他指针大小的类型，比如通用句柄 handle 和窗口句柄 HWND）)</td>
+</tr>
+<tr>
+<th>b</th>
+<td>int8, 1字节</td>
+</tr>
+<tr>
+<th>h</th>
+<td>int16, short 2个字节</td>
+</tr>
+<tr>
+<th>i</th>
+<td>int32（当用作指针时包括char、byte、short等）</td>
+</tr>
+<tr>
+<th>l</th>
+<td>int64, 长整数</td>
+</tr>
+<tr>
+<th>m</th>
+<td>ANSI 文本，字符串（仅供参考：'m' 表示多字节字符串或 'w' 翻过来。）</td>
+</tr>
+<tr>
+<th>t</th>
+<td>文本，字符串（指向第一个字符的指针）。 <i>和TCHAR*一样，是 Unicode NSIS 中的 Unicode 字符串。</i></td>
+</tr>
+<tr>
+<th>w</th>
+<td>WCHAR 文本, Unicode 字符串</td>
+</tr>
+<tr>
+<th>g</th>
+<td>GUID</td>
+</tr>
+<tr>
+<th>k</th>
+<td>回调</td>
+</tr>
+<tr>
+<th>@</th>
+<td>直接寄存器内存访问（缓冲区限制为 <code>(NSIS_MAX_STRLEN - 24) * NSIS_CHAR_SIZE</code> 字节）</td>
+</tr>
+<tr>
+<th>&amp;v<i>N</i></th>
+<td><i>N</i> 字节填充（仅限结构）</td>
+</tr>
+<tr>
+<th>&amp;i<i>N</i></th>
+<td><i>N</i> 字节的整数（仅限结构）</td>
+</tr>
+<tr>
+<th>&amp;l</th>
+<td>结构的大小</td>
+</tr>
+<tr>
+<th>&amp;t<i>N</i></th>
+<td><i>N</i> TCHAR 文本字符数组（仅限结构）</td>
+</tr>
+<tr>
+<th>&amp;m<i>N</i></th>
+<td><i>N</i> CHAR ANSI 字符数组（仅限结构）</td>
+</tr>
+<tr>
+<th>&amp;w<i>N</i></th>
+<td>N 个 WCHAR Unicode 字符数组（仅限结构）</td>
+</tr>
+<tr>
+<th>&amp;g<i>16</i></th>
+<td><i>16</i> 字节的 GUID（仅限结构）</td>
+</tr>
+</table>
+<p>此外，每种类型（<i>b</i>、<i>h</i>、<i>k</i> 和 <i>@</i> 除外）都可以使用星号作为前缀来表示 一个指针。 当使用一个星号时，System 插件仍然认为是参数的值，而不是指针的地址。 要传递直接地址，请使用不带星号的“p”。 一个<A href="#pointer">使用示例</A> 。 <A href="#memfuncs">Alloc</A> 返回地址，因此它的返回值应该与 `p' 一起使用，不带星号。</p>
+</blockquote>
+
+<h4>可以使用的源和目标</h4>
+
+<blockquote>
+<table>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+<tr>
+<th>.</th>
+<td>忽略</td>
+<td></td>
+</tr>
+<tr>
+<th><i>number</i></th>
+<td>具体的十六进制、十进制或八进制整数值。可以使用符号（“|”）对几个整数进行“或”运算</td>
+</tr>
+<tr>
+<th>'<i>string</i>'<br>"<i>string</i>"<br>`<i>string</i>`</th>
+<td>具体字符串值</td>
+</tr>
+<tr>
+<th><i>r0</i> 到 <i>r9</i></th>
+<td>分别为$0到$9</td>
+</tr>
+<tr>
+<th><i>r10</i> 到 <i>r19</i><br><i>R0</i> 到 <i>R9</i></th>
+<td>分别为$R0到$R9</td>
+</tr>
+<tr>
+<th>c</th>
+<td>$CMDLINE</td>
+</tr>
+<tr>
+<th>d</th>
+<td>$INSTDIR</td>
+</tr>
+<tr>
+<th>o</th>
+<td>$OUTDIR</td>
+</tr>
+<tr>
+<th>e</th>
+<td>$EXEDIR</td>
+</tr>
+<tr>
+<th>a</th>
+<td>$LANGUAGE</td>
+</tr>
+<tr>
+<th>s</th>
+<td>NSIS 堆栈</td>
+</tr>
+<tr>
+<th>n</th>
+<td>源为空，目标不需要输出</td>
+</tr>
+</table>
+<p>使用@类型时，源是必需的，并且必须是寄存器变量。当调用返回时，源寄存器已包含字符串形式的内存地址，因此使用目标通常<A href="#directvarmemparam">没有必要</A>。</p>
+</blockquote>
+
+<h4>回调</h4>
+
+<blockquote>
+<p>回调函数只是一个传递给函数并由函数自身回调的函数。 它们经常用于逐项传递可能很大的数据集。 例如，<A href="https://msdn.microsoft.com/en-us/library/ms633494">EnumChildWindows</A> 使用 <A href="https://msdn.microsoft.com/en -us/library/ms633493">回调函数</A>。 由于 NSIS 函数不是很常规的函数，System 插件提供了自己的机制来专门支持回调函数。 它允许您创建回调函数并在每次调用回调函数时通知您。</p>
+
+<p>回调函数的创建是使用 <A href="#callfuncs">Get</A> 和回调创建语法完成的。 由于您不能自己调用回调，因此应使用点省略参数的源。调用回调时，参数的目标将填充传递给回调的值。回调将返回的值由返回“参数”的源设置。返回“参数”的目标应始终设置为System通知您调用回调的位置。</p>
+
+<blockquote><pre>System::Get "(i .r0, i .r1) iss"</pre></blockquote>
+
+<p>要向函数传递回调，请使用k类型。</p>
+
+<blockquote><pre>System::Get "(i .r0, i .r1) isR0"
+Pop $0
+System::Call "dll::UseCallback(k r0)"</pre></blockquote>
+
+<p>每次调用回调时，字符串 callback#（#是回调的编号），将被放置在返回“参数”的目标中。 创建的第一个回调的编号是 1，第二个是 2，第三个是 3，依此类推。 由于 System 是单线程的，回调只能在调用另一个函数时调用。 例如，EnumChildWindows 的回调只能在 EnumChildWindows 被调用时调用。 因此，您应该在每次可能调用回调的函数调用后检查 callback#。</p>
+
+<blockquote><pre>System::Get "(i .r0, i .r1) isR0"
+Pop $0
+System::Call "dll::UseCallback(k r0)"
+StrCmp $R0 "callback1" 0 +2
+DetailPrint "UseCallback 将 ($0, $1) 传递给回调"
+</pre></blockquote>
+
+<p>处理回调调用后，您应该使用 <A href="#callfuncs">Call</A>，将 <A href="#callfuncs">Get</A> 返回的值传递给回调 . 这告诉 System 从回调中返回。 在调用函数之前必须清除返回“参数”的目标，以避免错误检测回调调用。 如果您在创建回调时为返回“参数”指定了源，则应使用适当的返回值填充该源。 回调不会自动释放，不要忘记在使用完后释放它。</p>
+
+<blockquote><pre>System::Get "(i .r0, i .r1) isR0"
+Pop $0
+System::Call "dll::UseCallback(k r0)"
+loop:
+	StrCmp $R0 "callback1" 0 done
+	DetailPrint "UseCallback 将 ($0, $1) 传递给回调"
+	Push 1 # 回调的返回值
+	StrCpy $R0 "" # 清除 $R0 以防没有更多的回调调用
+	System::Call $0 # 通知 System 从回调中返回
+	Goto loop
+done:
+System::Free $0
+</pre></blockquote>
+
+<p>完整的<A href="“#callback”" >示例</A>。</p>
+
+</blockquote>
+
+<h4>注意：</h4>
+
+<blockquote>
+<ul>
+<li>若要查找COM接口中的成员索引，需要在 Visual C/C++ 或 Platform SDK 附带的头文件中搜索此COM接口的定义。索引从零开始。
+              
+<li>如果找不到函数或使用了 t 参数类型，则将在其名称后附加“a”或“W”，然后再次查找该函数。这样做是因为许多 Windows API 函数有两个版本，一个用于ANSI字符串，另一个用于 Unicode 字符串。函数的 ANSI 版本用“A”标记，Unicode 版本用“W”标记。例如：lstrcpyA 和 lstrcpyW。 
+              
+<li>可以在没有路径的情况下加载 system32 目录中的库。所有其他库都应使用带引号的完整路径加载。</li>
+</ul>
+</blockquote>
+
+<h4>可用选项</h4>
+
+<blockquote>
+<table>
+<tr>
+ <TH width="40">选项</TH>
+ <TH width=700>意义</TH>
+</tr>
+<tr>
+<th>c  </th>
+<td>cdecl 调用约定（调用者恢复的堆栈）。 默认情况下，在 x86 上使用 stdcall 调用约定（被调用者恢复的堆栈）。</td>
+<td></td>
+</tr>
+<tr>
+<th>r</th>
+<td>始终返回（对于GET意味着您应该弹出结果和过程，对于CALL意味着您应该至少弹出结果）。默认情况下，只为错误返回结果（对于GET，您将弹出错误结果或正确的过程，对于CALL，您将在定义的返回位置获得返回值或结果）。</td>
+</tr>
+<tr>
+<th>n</th>
+<td>无重新定义。 无论何时使用此过程，它都不会被 GET 或 CALL 重新定义。 此选项永远不会继承给子项。</td>
+</tr>
+<tr>
+<th>s</th>
+<td>使用通用堆栈。 每当定义第一个回调时，系统就会开始使用临时堆栈进行函数调用。</td>
+</tr>
+<tr>
+<th>e</th>
+<td>过程结束后调用 GetLastError() 并将结果压入堆栈。</td>
+</tr>
+<tr>
+<th>u</th>
+<td>调用后使用 FreeLibrary 卸载DLL。</td>
+</tr>
+<tr>
+<th>2</th>
+<td>实验性v2语法</td>
+</tr>
+</table>
+</blockquote>
+
+<h4>实验性 v2 语法</h4>
+
+<ul>
+<li><A href="#v2typealign">大写的结构类型对齐</A>到它们的自然对齐方式。小写类型封装时没有对齐。
+<li>基于分配的回调的 <A href="#v2callback">Callback id</A> </li>     
+</ul>
+
+<h4>例子</h4>
+
+<blockquote><pre>
+<a name="func"></a>System::<b>Call</b> 'user32::MessageBox(p $HWNDPARENT, t "NSIS System Plug-in", t "Test", i 0)'
+<a name="funcqpath"></a>System::<b>Call</b> '"$SysDir\MyLibrary.dll"::MyFunction(i 42)'
+</pre></blockquote>
+<blockquote><pre>
+<a name="funcaddr"></a>System::<b>Call</b> "kernel32::GetModuleHandle(t 'user32.dll') p .s"
+System::<b>Call</b> "kernel32::GetProcAddress(p s, m 'MessageBoxA') p .r0"
+System::<b>Call</b> "::$0(p $HWNDPARENT, m 'GetProcAddress test', m 'NSIS System Plug-in', i 0)"
+</pre></blockquote>
+<blockquote><pre>
+<a name="get"></a>System::<b>Get</b> "user32::MessageBox(p $HWNDPARENT, t 'This is a default text', t 'Default', i 0)"
+Pop $0
+System::<b>Call</b> "$0"
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Get</b> "user32::MessageBox(p $HWNDPARENT, t 'This is a default text', \
+	t 'Default', i 0x1|0x10)"
+Pop $0
+System::<b>Call</b> "$0(, 'This is a System::Get test', 'NSIS System Plug-in',)"
+</pre></blockquote>
+<blockquote><pre>
+<a name="pointer"></a>System::<b>Call</b> "advapi32::GetUserName(t .r0, *i ${NSIS_MAX_STRLEN} r1) i.r2"
+DetailPrint "User name - $0"
+DetailPrint "String length - $1"
+DetailPrint "Return value - $2"
+</pre></blockquote>
+<blockquote><pre>
+<a name="structaddr"></a>System::Alloc 4
+Pop $0
+System::<b>Call</b> "*$0(i 5)" ; Write
+System::<b>Call</b> "*$0(i .r1)" ; Read
+System::Free $0
+DetailPrint $1
+</pre></blockquote>
+<blockquote><pre>
+<a name="newstruct"></a>System::<b>Call</b> "*(i 5) p .r0"
+System::<b>Call</b> "*$0(i .r1)"
+System::Free $0
+DetailPrint $1
+</pre></blockquote>
+<a name="structsize"></a><blockquote><pre>
+System::Call '*0(p, <b>&amp;l.r2,</b> &amp;t2)' ; &amp;l. is not part of the struct
+DetailPrint "Struct size=$2" 
+</pre></blockquote>
+<a name="structsizemember"></a><blockquote><pre>
+System::Call '*(<b>&amp;l4</b>,i,i,i,i,&amp;t128)p.r1' ; Fills dwOSVersionInfoSize with the struct size as a int32
+${If} $1 Z&lt;&gt; 0
+	System::Call 'kernel32::GetVersionEx(pr1)i.r0'
+	System::Call '*$1(i,i.R1,i.R2,i.R3)'
+	System::Free $1
+	${IfThen} $0 &lt;&gt; 0 ${|} DetailPrint "v$R1.$R2.$R3" ${|}
+${EndIf}
+</pre></blockquote>
+<blockquote><pre>
+<a name="directvarmemparam"></a>System::<b>Call</b> "user32::GetClientRect(p $hwndparent, @ r0)"
+System::<b>Call</b> "*$0(i,i,i.r1,i.r2)"
+DetailPrint ClientRect=$1x$2
+</pre></blockquote>
+<blockquote><pre>
+<a name="com"></a># defines
+!define CLSCTX_INPROC_SERVER 1
+!define CLSID_ActiveDesktop {75048700-EF1F-11D0-9888-006097DEACF9}
+!define IID_IActiveDesktop {F490EB00-1240-11D1-9888-006097DEACF9}
+# create IActiveDesktop interface
+System::<b>Call</b>  "ole32::CoCreateInstance(
+	\ g '${CLSID_ActiveDesktop}', p 0,
+	\ i ${CLSCTX_INPROC_SERVER},
+	\ g '${IID_IActiveDesktop}', *p .r0)
+i.r1" StrCmp $1 0 0
+end # callIActiveDesktop-&gt;GetWallpaper
+System::<b>Call</b> "$0-&gt;4(w .r2, i ${NSIS_MAX_STRLEN}, i
+0)" # callIActiveDesktop-&gt;Release
+System::<b>Call</b> "$0-&gt;2()"
+# print result
+DetailPrint $2
+end:
+</pre></blockquote>
+<blockquote><pre>
+InitPluginsDir
+File "/oname=$PLUGINSDIR\MyDLL.dll" MyDLL.dll
+System::<b>Call</b> 'KERNEL32::AddDllDirectory(w "$PLUGINSDIR")'
+System::<b>Call</b> 'KERNEL32::LoadLibrary(t "$PLUGINSDIR\MyDLL.dll")p.r1'
+System::<b>Call</b> 'MyDLL::MyFunc(i 5) ? u'
+System::<b>Call</b> 'KERNEL32::FreeLibrary(pr1)'
+Delete $PLUGINSDIR\MyDLL.dll
+</pre></blockquote>
+<blockquote><pre>
+<a name="callback"></a>System::<b>Get</b> "(p.r1, p) iss"
+Pop $R0
+System::<b>Call</b> "user32::EnumChildWindows(p $HWNDPARENT, k R0, p) i.s"
+loop:
+	Pop $0
+	StrCmp $0 "callback1" 0 done
+	System::<b>Call</b> "user32::GetWindowText(pr1,t.r2,i${NSIS_MAX_STRLEN})"
+	System::<b>Call</b> "user32::GetClassName(pr1,t.r3,i${NSIS_MAX_STRLEN})"
+	IntFmt $1 "0x%X" $1
+	DetailPrint "$1 - [$3] $2"
+	Push 1 # callback's return value
+	System::<b>Call</b> "$R0"
+	Goto loop
+done:
+System::Free $R0
+DetailPrint "EnumChildWindows returned $0"
+</pre></blockquote>
+<a name="v2callback"></a><blockquote><pre>
+System::Get '(m.r1)ir2r0 <b>?2</b>' ; v2 syntax
+Pop $9
+System::Call 'kernel32::EnumSystemLocalesA(k r9, i 0)'
+loop:
+	StrCmp <b>$0 "callback$9"</b> 0 done
+	DetailPrint "Locale: $1"
+	StrCpy $2 1 ; EnumLocalesProc return value
+	System::Call $9 ; return from EnumLocalesProc
+	Goto loop
+done:
+System::Free $9
+</pre></blockquote>
+<a name="v2typealign"></a><blockquote><pre>
+System::Call '*(&amp;t50 "!")p.r2' ; DecimalSep
+System::Call '*(&amp;t50 "`")p.r3' ; ThousandSep
+System::Call '*(i 2, i 0, i 3, <b>P r2, P r3</b>, i 1)p.r1 <b>?2</b>'
+System::Call 'kernel32::GetNumberFormat(i 0, i 0, t "1337.666" r4, p r1, t.r5, i ${NSIS_MAX_STRLEN})'
+DetailPrint "Custom formated $4: $5"
+System::Free $3
+System::Free $2
+System::Free $1
+</pre></blockquote>
+<blockquote><pre>
+<a name="repeat"></a>!define MB "user32::MessageBox(p$HWNDPARENT,t,t'NSIS System Plug-in',i0)"
+System::<b>Call</b> "${MB}(,'my message',,)"
+System::<b>Call</b> "${MB}(,'another message',,) i.r0"
+MessageBox MB_OK "last call returned $0"
+</pre></blockquote>
+<blockquote><pre>
+<a name="repeatproc"></a>System::<b>Call</b> "user32::SendMessage(p $HWNDPARENT, t 'test', t 'test', p 0) p.s ? \
+	e (,t'test replacement',,) i.r0 ? !e #user32::MessageBox"
+DetailPrint $0
+ClearErrors
+Pop $0
+IfErrors good
+MessageBox MB_OK "this message box will never be reached"
+good:
+</pre></blockquote>
+</blockquote>
+</li>
+</ul>
+
+</div>
+
+<h3><a name="64bitfuncs"></a>64-bit 函数</h3>
+
+<div>
+
+<ul>
+
+<li>
+<b id="Int64Op">Int64Op</b> <i>ARG1</i> <i>OP</i> [<i>ARG2</i>]
+<blockquote>
+<p>对 ARG1 和可选的 ARG2 执行 OP 运算，并将结果返回堆栈。 ARG1 和 ARG2 都是 64 位整数。 这意味着它们的范围可以在 -2^63 和 2^63 - 1 之间。</p>
+<h4>可执行操作</h4>
+<ul>
+<li>加法 -- <b>+</b>
+<li>减法 -- <b>-</b>
+<li>乘法 -- <b>*</b>
+<li>除法 -- <b>/</b>
+<li>取模 -- <b>%</b>
+<li>左移 -- <b>&lt;&lt;</b>
+<li>算术右移 -- <b>&gt;&gt;</b>
+<li>逻辑右移 -- <b>&gt;&gt;&gt;</b>
+<li>位或 -- <b>|</b>
+<li>位与 -- <b>&amp;</b>
+<li>位异或 -- <b>^</b>
+<li>按位非(一个参数) -- <b>~</b>
+<li>逻辑非(一个参数) -- <b>!</b>
+<li>逻辑或 -- <b>||</b>
+<li>逻辑与 -- <b>&amp;&amp;</b>
+<li>小于 -- <b>&lt;</b>
+<li>等于 -- <b>=</b>
+<li>大于 -- <b>&gt;</b></li>
+</ul>
+
+<h4>应用范例</h4>
+
+<blockquote><pre>
+System::<b>Int64Op</b> 5 + 5
+Pop $0
+DetailPrint "5 + 5 = $0" # 10
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 526355 * 1565487
+Pop $0
+DetailPrint "526355 * 1565487 = $0" # 824001909885
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 5498449498849818 / 3
+Pop $0
+DetailPrint "5498449498849818 / 3 = $0" # 1832816499616606
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 0x89498A198E4566C % 157
+Pop $0
+DetailPrint "0x89498A198E4566C % 157 = $0" # 118
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 1 &lt;&lt; 62
+Pop $0
+DetailPrint "1 &lt;&lt; 62 = $0" # 4611686018427387904
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 0x4000000000000000 &gt;&gt; 62
+Pop $0
+DetailPrint "0x4000000000000000 &gt;&gt; 62 = $0" # 1
+
+System::<b>Int64Op</b> 0x8000000000000000 &gt;&gt; 1
+Pop $0
+DetailPrint "0x8000000000000000 &gt;&gt; 1 = $0" # -4611686018427387904 (0xC000000000000000)
+
+System::<b>Int64Op</b> 0x8000000000000000 &gt;&gt;&gt; 1
+Pop $0
+DetailPrint "0x8000000000000000 &gt;&gt;&gt; 1 = $0" # 4611686018427387904 (0x4000000000000000)
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 0x12345678 &amp; 0xF0F0F0F0
+Pop $0
+# IntFmt is 32-bit, this is just for the example
+IntFmt $0 "0x%X" $0
+DetailPrint "0x12345678 &amp; 0xF0F0F0F0 = $0" # 0x10305070
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 1 ^ 0
+Pop $0
+DetailPrint "1 ^ 0 = $0" # 1
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 1 || 0
+Pop $0
+DetailPrint "1 || 0 = $0" # 1
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 1 &amp;&amp; 0
+Pop $0
+DetailPrint "1 &amp;&amp; 0 = $0" # 0
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 9302157012375 &lt; 570197509190760
+Pop $0
+DetailPrint "9302157012375 &lt; 570197509190760 = $0" # 1
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 5168 &gt; 89873
+Pop $0
+DetailPrint "5168 &gt; 89873 = $0" # 0
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 189189 = 189189
+Pop $0
+DetailPrint "189189 = 189189 = $0" # 1
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 156545668489 ~
+Pop $0
+DetailPrint "156545668489 ~ = $0" # -156545668490
+</pre></blockquote>
+<blockquote><pre>
+System::<b>Int64Op</b> 1 !
+Pop $0
+DetailPrint "1 ! = $0" # 0
+</pre></blockquote>
+</blockquote>
+</li>
+
+</ul>
+
+</div>
+
+<h2><a name="FAQ"></a>FAQ</h2>
+
+<div>
+
+<ul>
+
+<li>
+<b>Q:</b> 如何将结构传递给函数？
+<blockquote>
+<p><b>A:</b> 首先，您必须分配结构。 这可以通过使用具有特殊结构分配语法的 <A href="#memfuncs">Alloc</A> 或 <A href="#callfuncs">Call</A>来完成。 接下来，如果你需要在结构中传递数据，那么你必须用数据填充它。 然后使用指向该结构的指针调用该函数。 最后，如果你想从被调用函数写入的结构中读取数据，则必须在结构处理语法中使用 <A href="#callfuncs">Call</A> 。 完成所有操作后，重要的是要记住释放结构。</p>
+
+<h4>分配</h4>
+
+<blockquote><p>要使用 <A href="#memfuncs">Alloc</A> 分配结构，您必须知道结构的大小（以字节为单位）。 因此，通常使用 <A href="#callfuncs">Call</A> 会更容易。 在下面的例子中，很容易看出所需的大小是 16 个字节，但在其他情况下可能就不是那么简单了。 在这两种情况下，结构地址都位于堆栈的顶部，应该使用 Pop 弹出到变量来检索。</p>
+
+<blockquote><pre>
+System::Alloc 16
+</pre></blockquote>
+
+<blockquote><pre>
+System::Call "*(i, i, i, t)p.s"
+</pre></blockquote>
+
+</blockquote>
+
+<h4>设置数据</h4>
+
+<blockquote><p>可以使用<A href="#callfuncs">Call</A> 来设置数据。 它可以在分配阶段完成，也可以在另一个阶段使用结构处理语法完成。</p>
+
+<blockquote><pre>
+System::Call "*(i 5, i 2, i 513, t 'test')p.s"
+</pre></blockquote>
+
+<blockquote><pre>
+# 假设结构的内存地址保存在 $0
+System::Call "*$0(i 5, i 2, i 513, t 'test')"
+</pre></blockquote>
+
+</blockquote>
+
+<h4>传递给函数</h4>
+
+<blockquote><p>由于所有分配方法都返回一个地址，因此传递的数据类型应该是一个整数，一个结构体在内存中的地址。</p>
+
+<blockquote><pre>
+#假设结构的内存地址保存在 $0
+System::Call "dll::func(p r0)"
+</pre></blockquote>
+
+</blockquote>
+
+<h4>读取数据</h4>
+
+<blockquote><p>可以使用与设置结构相同的语法从结构中读取数据。唯一的区别是将设置参数的目标部分，而使用点省略源部分。</p>
+
+<blockquote><pre>
+# 假设结构的内存地址保持在$0中
+System::Call "*$0(i .r0, i .r1, i .r2, t .r3)"
+DetailPrint "first int = $0"
+DetailPrint "second int = $1"
+DetailPrint "third int = $2"
+DetailPrint "string = $3"
+</pre></blockquote>
+
+</blockquote>
+
+<h4>释放内存</h4>
+
+<blockquote><p>使用<A href="“#memfuncs”" >Free</A>&nbsp;释放内存.</p>
+
+<blockquote><pre>
+# assuming the struct's memory address is kept in $0
+System::Free $0
+</pre></blockquote>
+
+</blockquote>
+
+<h4>完整示例 </h4>
+
+<blockquote><pre>
+# 分配
+System::Call "*(i,i,p,p,p,p,p,p)p.r1"
+# call
+System::Call "Kernel32::GlobalMemoryStatus(p r1)"
+# get
+System::Call "*$1(i.r2, i.r3, p.r4, p.r5, p.r6, p.r7, p.r8, p.r9)"
+# 释放
+System::Free $1
+# 窗口信息输出
+DetailPrint "结构尺寸: $2 bytes"
+DetailPrint "内存负载 : $3%"
+DetailPrint "总物理内存: $4 bytes"
+DetailPrint "释放物理内存: $5 bytes"
+DetailPrint "总页面文件: $6 bytes"
+DetailPrint "释放页面文件: $7 bytes"
+DetailPrint "虚拟内存总计: $8 bytes"
+DetailPrint "释放虚拟内存: $9 bytes"
+</pre>
+</li>
+<p align="right"><A href="https://www.cnblogs.com/nsis/">水晶石</A>  2022.12.31</p>
+  </ul>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>
