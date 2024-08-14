@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFTPDemo", "SFTPDemo.csproj", "{00526B04-C42C-4095-80C0-F676B597DA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFTDemo2", "..\SFTDemo2\SFTDemo2.csproj", "{2700529D-9BFF-46E1-ABDA-5AA11B616F9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00526B04-C42C-4095-80C0-F676B597DA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00526B04-C42C-4095-80C0-F676B597DA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00526B04-C42C-4095-80C0-F676B597DA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00526B04-C42C-4095-80C0-F676B597DA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2700529D-9BFF-46E1-ABDA-5AA11B616F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2700529D-9BFF-46E1-ABDA-5AA11B616F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2700529D-9BFF-46E1-ABDA-5AA11B616F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2700529D-9BFF-46E1-ABDA-5AA11B616F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42FA5B9F-27C7-43C3-8F4D-EDCF4513B96B}
+	EndGlobalSection
+EndGlobal
