@@ -8,7 +8,7 @@ class Program
     {
         UpgradeHub upgradeHub = new UpgradeHub();
         await upgradeHub.StartAsync();
-        await upgradeHub.SendMessageAsync("client","Hello");
+        //await upgradeHub.SendMessageAsync("client","Hello");
         
         while (true)
         {
