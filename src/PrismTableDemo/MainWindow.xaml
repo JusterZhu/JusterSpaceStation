@@ -7,12 +7,15 @@
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Header" Value="{Binding DataContext.Title}"/>
-        </Style>
-    </Window.Resources>
     <Grid>
-        <TabControl prism:RegionManager.RegionName="TabRegion"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="add" Width="80" Height="30" Margin="1" Name="BtnAdd" Click="BtnAdd_OnClick"></Button>
+            <Button Content="remove" Width="80" Height="30" Margin="1" Name="BtnRemove" Click="BtnRemove_OnClick"></Button>
+        </StackPanel>
+        <TabControl Grid.Row="1" prism:RegionManager.RegionName="TabRegion" />
     </Grid>
 </Window>

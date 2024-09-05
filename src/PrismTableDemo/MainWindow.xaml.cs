@@ -19,28 +19,28 @@ namespace PrismTableDemo;
 public partial class MainWindow : Window
 {
     private readonly IRegionManager _regionManager;
-    //private ObservableCollection<MyItem> _myItems = new ObservableCollection<MyItem>();
-
-    /*public ObservableCollection<MyItem> MyItems
-    {
-        get => _myItems;
-        set => _myItems = value;
-    }*/
-
+    
     public MainWindow(IRegionManager regionManager)
     {
         InitializeComponent();
         _regionManager = regionManager;
         _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
         _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewB));
-        /*MyItems.Add(new MyItem() { Name = nameof(ViewA), RegionName = "TabRegion" });
-        MyItems.Add(new MyItem() { Name = nameof(ViewB), RegionName = "TabRegion" });*/
         DataContext = this;
     }
-}
 
-public class MyItem
-{
-    public string Name { get; set; }
-    public string RegionName { get; set; }
+    private void BtnRemove_OnClick(object sender, RoutedEventArgs e)
+    {
+        var region = _regionManager.Regions["TabRegion"];
+        var view = region.Views.FirstOrDefault(v => v.GetType() == typeof(ViewA));
+        if (view != null)
+        {
+            region.Remove(view);
+        }
+    }
+
+    private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
+    {
+        _regionManager.RegisterViewWithRegion("TabRegion", typeof(ViewA));
+    }
 }

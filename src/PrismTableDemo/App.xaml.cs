@@ -1,8 +1,5 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using PrismTableDemo.Views;
 
 namespace PrismTableDemo;
 
@@ -16,14 +13,14 @@ public partial class App : PrismApplication
         return Container.Resolve<MainWindow>();
     }
 
-    protected override void RegisterTypes(IContainerRegistry containerRegistry)
-    {
-        
-    }
+    protected override void RegisterTypes(IContainerRegistry containerRegistry) { }
 
 
-    protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+    protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) { }
+    
+    protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
     {
-        // 配置模块
+        base.ConfigureRegionAdapterMappings(regionAdapterMappings);
+        regionAdapterMappings.RegisterMapping(typeof(TabControl), Container.Resolve<TabControlRegionAdapter>());
     }
 }
