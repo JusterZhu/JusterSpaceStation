@@ -20,20 +20,13 @@ namespace PrismTableDemo
                             .Cast<TabItem>()
                             .FirstOrDefault(i => i.Content == view);
 
-                        if (tabItem != null)
+                        tabItem = new TabItem
                         {
-                            tabItem.Visibility = System.Windows.Visibility.Visible;
-                        }
-                        else
-                        {
-                            tabItem = new TabItem
-                            {
-                                Content = view,
-                                Header = ((UserControl)view).Tag
-                            };
+                            Content = view,
+                            Header = ((UserControl)view).Tag
+                        };
 
-                            regionTarget.Items.Add(tabItem);
-                        }
+                        regionTarget.Items.Add(tabItem);
                     }
                 }
 
@@ -47,7 +40,7 @@ namespace PrismTableDemo
 
                         if (tabItem != null)
                         {
-                            tabItem.Visibility = System.Windows.Visibility.Collapsed;
+                            regionTarget.Items.Remove(tabItem);
                         }
                     }
                 }
