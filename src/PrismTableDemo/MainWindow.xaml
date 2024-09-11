@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="add" Width="80" Height="30" Margin="1" Name="BtnAdd" Click="BtnAdd_OnClick"></Button>
             <Button Content="remove" Width="80" Height="30" Margin="1" Name="BtnRemove" Click="BtnRemove_OnClick"></Button>
-            <Button Content="show view C" Name="BtnShowViewC" Click="BtnShowViewC_OnClick"></Button>
+            <Button Content="show view C1" Name="BtnShowViewC" Click="BtnShowViewC_OnClick"></Button>
         </StackPanel>
         <TabControl Grid.Row="1" prism:RegionManager.RegionName="TabRegion" />
     </Grid>
