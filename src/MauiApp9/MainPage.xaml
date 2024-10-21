@@ -2,24 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp9.MainPage">
-    <ContentPage.TitleBar>
-        <TitleBar x:Name="TeamsTitleBar"
-              Title="Hello World"
-              Icon="appicon.png"
-              HeightRequest="46">
-            <TitleBar.Content>
-                <Entry x:Name="SearchTitleBar"
-                   Placeholder="Search"
-                   VerticalOptions="Center"
-                   MinimumWidthRequest="300"
-                   MaximumWidthRequest="450"
-                   HeightRequest="32"/>
-            </TitleBar.Content>
-        </TitleBar>
-    </ContentPage.TitleBar>
     <Grid RowDefinitions="1*,7*">
-        <TitleBar Title="My title bar">
-        </TitleBar>
         <ScrollView Grid.Row="1">
             <VerticalStackLayout
         Padding="30,0"
@@ -46,6 +29,12 @@
             SemanticProperties.Hint="Counts the number of times you click"
             Clicked="OnCounterClicked"
             HorizontalOptions="Fill" />
+
+                <Button
+x:Name="ShowWindowBtn"
+Text="Show window" 
+Clicked="ShowWindowBtn_Clicked"
+HorizontalOptions="Fill" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

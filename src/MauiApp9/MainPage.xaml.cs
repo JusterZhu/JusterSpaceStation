@@ -2,6 +2,8 @@
 {
     public partial class MainPage : ContentPage
     {
+        private NewWindow1 window = new NewWindow1();
+
         int count = 0;
 
         public MainPage()
@@ -20,6 +22,11 @@
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
-    }
 
+        private void ShowWindowBtn_Clicked(object sender, EventArgs e)
+        {
+            Application.Current?.ActivateWindow(window);
+            Application.Current.
+        }
+    }
 }
