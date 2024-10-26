@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            button1 = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             BtnTestCommand = new Button();
@@ -40,15 +39,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)form1ViewModelBindingSource).BeginInit();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(363, 415);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -108,7 +98,6 @@
             Controls.Add(BtnTestCommand);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -118,8 +107,6 @@
         }
 
         #endregion
-
-        private Button button1;
         private Label label1;
         private PictureBox pictureBox1;
         private Button BtnTestCommand;
