@@ -12,8 +12,9 @@ namespace WinFormsApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 #pragma warning disable WFO5001
-            Application.SetColorMode(systemColorMode: SystemColorMode.Dark);
+            Application.SetColorMode(SystemColorMode.Dark);
 #pragma warning restore WFO5001
+
             Application.Run(new Form1());
         }
     }
