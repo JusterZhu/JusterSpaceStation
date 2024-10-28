@@ -1,0 +1,20 @@
+{
+  "body": [
+    {
+      "recordId": 8,
+      "name": "packet_20240806221604542_1.0.0.0",
+      "hash": "ec628caca645abb9a1c3ee5795fdb05372d9c353fc2430ccfc612564c11df176",
+      "releaseDate": "2024-08-06T22:23:36",
+      "url": "http://localhost:5008/files/packet_20240806221604542_1.0.0.0.zip",
+      "version": "1.0.0.1",
+      "appType": 1,
+      "platform": 1,
+      "productId": "a77c9df5-45f8-4ee9-b3ad-b9431ce0b51c",
+      "isForcibly": true,
+      "format": ".zip",
+      "size": 679
+    }
+  ],
+  "code": 200,
+  "message": "Request succeeded."
+}
